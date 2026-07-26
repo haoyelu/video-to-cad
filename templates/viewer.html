@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Assembly Viewer</title>
+<style>
+  :root {
+    --panel-bg: rgba(16, 20, 28, 0.72);
+    --panel-border: rgba(255, 255, 255, 0.09);
+    --text: #e8ebf0;
+    --text-dim: #9aa3b2;
+    --accent: #5aa9ff;
+    --accent-hot: #ff9f43;
+  }
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body {
+    font-family: "SF Pro Text", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background:
+      radial-gradient(120% 90% at 50% 0%, #2a3244 0%, #171c27 45%, #0b0e14 100%);
+    color: var(--text);
+  }
+  #app { position: fixed; inset: 0; }
+  canvas { display: block; }
+
+  #panel {
+    position: fixed; top: 18px; left: 18px; width: 300px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 14px;
+    padding: 16px 18px 14px;
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    user-select: none;
+  }
+  #panel h1 { margin: 0 0 2px; font-size: 17px; font-weight: 650; letter-spacing: .2px; }
+  #panel .caption { margin: 0 0 12px; font-size: 11.5px; color: var(--text-dim); line-height: 1.45; }
+
+  .row { display: flex; gap: 8px; align-items: center; margin: 9px 0; }
+  .row.split { justify-content: space-between; }
+
+  button {
+    flex: 1; padding: 7px 10px;
+    font-size: 12px; font-weight: 600; color: var(--text);
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px; cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  button:hover { background: rgba(255,255,255,.14); }
+  button:disabled { opacity: .4; cursor: default; }
+  button.active {
+    background: rgba(90,169,255,.22);
+    border-color: rgba(90,169,255,.65);
+    color: #cfe5ff;
+  }
+  button.hot.active {
+    background: rgba(255,159,67,.20);
+    border-color: rgba(255,159,67,.65);
+    color: #ffd9ae;
+  }
+
+  label.slider-label {
+    font-size: 11px; font-weight: 600; color: var(--text-dim);
+    width: 72px; flex: none; letter-spacing: .3px;
+  }
+  .value {
+    font-size: 11px; color: var(--text-dim); width: 48px; flex: none;
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  input[type=range] {
+    flex: 1; appearance: none; -webkit-appearance: none;
+    height: 4px; border-radius: 2px;
+    background: rgba(255,255,255,.16); outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--accent); border: 2px solid #0d1420;
+    box-shadow: 0 0 0 1px rgba(90,169,255,.5);
+    cursor: pointer;
+  }
+  #rpm::-webkit-slider-thumb { background: var(--accent-hot); box-shadow: 0 0 0 1px rgba(255,159,67,.5); }
+
+  .divider { height: 1px; background: rgba(255,255,255,.08); margin: 11px -6px; }
+
+  select {
+    flex: 1; padding: 7px 8px;
+    font-size: 12px; font-weight: 600; color: var(--text);
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px; cursor: pointer; outline: none;
+  }
+  select option { background: #171c27; color: var(--text); }
+
+  #buildCaption {
+    margin: 8px 0 2px; font-size: 12px; line-height: 1.5;
+    color: var(--text); font-variant-numeric: tabular-nums;
+  }
+  #buildCaption .feat { color: #cfe5ff; font-weight: 650; }
+  #buildParams {
+    margin: 0 0 6px; font-size: 11px; color: var(--text-dim);
+    line-height: 1.5; word-break: break-word;
+  }
+  #timeline {
+    list-style: none; margin: 6px 0 2px; padding: 0;
+    max-height: 168px; overflow-y: auto;
+  }
+  #timeline li {
+    font-size: 11px; color: var(--text-dim); padding: 3px 8px;
+    border-left: 2px solid rgba(255,255,255,.12);
+    cursor: pointer; transition: color .15s, border-color .15s, background .15s;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #timeline li:hover { color: var(--text); }
+  #timeline li.done { color: var(--text); border-left-color: rgba(90,169,255,.4); }
+  #timeline li.current {
+    color: #cfe5ff; border-left-color: var(--accent);
+    background: rgba(90,169,255,.12); font-weight: 650;
+  }
+
+  #loading {
+    position: fixed; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 14px;
+    background: radial-gradient(120% 90% at 50% 0%, #2a3244 0%, #171c27 45%, #0b0e14 100%);
+    z-index: 10; transition: opacity .5s;
+  }
+  #loading .bar { width: 240px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.12); overflow: hidden; }
+  #loading .fill { height: 100%; width: 0%; background: var(--accent); transition: width .2s; }
+  #loading .msg { font-size: 12px; color: var(--text-dim); letter-spacing: .5px; }
+  #loading.done { opacity: 0; pointer-events: none; }
+
+  #err {
+    position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+    max-width: 80vw; padding: 8px 14px; border-radius: 8px;
+    background: rgba(160,40,40,.85); color: #fff; font-size: 12px;
+    display: none; z-index: 20;
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="panel">
+  <h1 id="title">Assembly</h1>
+  <p class="caption" id="caption">Drag to orbit, scroll to zoom, right-drag to pan.</p>
+
+  <div class="row">
+    <button id="btnModeAssembly" class="active">Assembly</button>
+    <button id="btnModeBuild">Build components</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div id="assemblyControls">
+    <div class="row">
+      <button id="btnExplode">Explode</button>
+      <button id="btnAssemble">Assemble</button>
+    </div>
+    <div class="row">
+      <label class="slider-label">ASSEMBLY</label>
+      <input id="assembly" type="range" min="0" max="1" step="0.001" value="1" />
+      <span class="value" id="assemblyVal">100%</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <button id="btnRun" class="hot">&#9654;&nbsp; Run</button>
+    </div>
+    <div class="row" id="rpmRow">
+      <label class="slider-label">RPM</label>
+      <input id="rpm" type="range" min="60" max="3000" step="10" value="900" />
+      <span class="value" id="rpmVal">900</span>
+    </div>
+  </div>
+
+  <div id="buildControls" style="display:none">
+    <div class="row">
+      <label class="slider-label">PART</label>
+      <select id="componentSel"></select>
+    </div>
+    <div class="row">
+      <label class="slider-label">STEP</label>
+      <input id="buildStep" type="range" min="0" max="1" step="1" value="0" />
+      <span class="value" id="buildStepVal">&ndash;</span>
+    </div>
+    <div class="row">
+      <button id="btnPrevStep">&#9664;&#9664;</button>
+      <button id="btnPlaySteps" class="hot">&#9654;&nbsp; Play</button>
+      <button id="btnNextStep">&#9654;&#9654;</button>
+    </div>
+    <div id="buildCaption">&nbsp;</div>
+    <div id="buildParams"></div>
+    <ol id="timeline"></ol>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="row">
+    <button id="btnAuto">Auto-rotate</button>
+    <button id="btnReset">Reset view</button>
+  </div>
+</div>
+
+<div id="loading">
+  <div class="msg">LOADING PARTS&hellip;</div>
+  <div class="bar"><div class="fill" id="loadFill"></div></div>
+</div>
+<div id="err"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+// ============================================================================
+// Manifest-driven assembly viewer (video-to-cad skill template).
+// Reads ./viewer.json (see export_viz.py) and builds the whole scene/UI:
+//   - Assembly mode : instances placed at pos+rot_deg, explode/assemble scrub
+//                     staggered by assembly_stages.
+//   - Build mode    : per-component feature-step GLB swap with timeline.
+//   - Run mode      : crank_slider kinematics if motion.type == "crank_slider",
+//                     otherwise a simple turntable spin. Degrades gracefully.
+//
+// GLB convention (build123d export_gltf): vertices in METRES, CAD Z-up,
+// wrapped in a node rotated -90 deg about X. We counter-rotate the loaded
+// scene +90 deg about X and scale x1000 so everything lives in the CAD
+// mm frame with Z up (camera.up = +Z).
+// ============================================================================
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const ORIENT_FIX_X = Math.PI / 2;   // undo exporter's Z-up -> Y-up node
+const UNIT_SCALE = { mm: 1000, cm: 100, m: 1, in: 39.3700787 };
+const CRANK_SPIN_SIGN = -1;         // -theta about +axis puts pin at (T sin, T cos)
+const STEP_HOLD_S = 0.8;            // build playback cadence per feature
+const DEFAULT_COLOR = 0xb0b4ba;
+
+const $ = id => document.getElementById(id);
+const showError = m => {
+  const e = $('err');
+  e.textContent = m; e.style.display = 'block';
+  console.error(m);
+};
+
+// ------------------------------------------------------------------- scene
+const container = $('app');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+container.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// spinPivot lets "spin" motion rotate the assembly about its own centre
+const spinPivot = new THREE.Group();
+scene.add(spinPivot);
+const assemblyRoot = new THREE.Group();
+spinPivot.add(assemblyRoot);
+const buildRoot = new THREE.Group();
+buildRoot.visible = false;
+scene.add(buildRoot);
+
+const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 1, 8000);
+camera.up.set(0, 0, 1);                                // CAD frame: Z up
+camera.position.set(505, -580, 330);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.autoRotateSpeed = 1.2;
+controls.update();
+
+// environment for PBR metals
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+// lights: soft key + fill + rim (positions rescaled to fit the model later)
+const key = new THREE.DirectionalLight(0xffffff, 2.2);
+key.position.set(300, -260, 520);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.bias = -0.0004;
+key.shadow.radius = 6;
+scene.add(key);
+scene.add(key.target);
+
+const fill = new THREE.DirectionalLight(0xbcd4ff, 0.7);
+fill.position.set(-350, 300, 180);
+scene.add(fill);
+
+const rim = new THREE.DirectionalLight(0xffe0b8, 0.5);
+rim.position.set(-150, -400, -100);
+scene.add(rim);
+
+scene.add(new THREE.AmbientLight(0x404860, 0.35));
+
+// ground shadow catcher + faint disc (unit circles, scaled to the model)
+const ground = new THREE.Mesh(
+  new THREE.CircleGeometry(1, 64),
+  new THREE.ShadowMaterial({ opacity: 0.38 })
+);
+ground.receiveShadow = true;
+scene.add(ground);
+
+const disc = new THREE.Mesh(
+  new THREE.CircleGeometry(1, 64),
+  new THREE.MeshStandardMaterial({ color: 0x11151d, metalness: 0.2, roughness: 0.9,
+                                   transparent: true, opacity: 0.55 })
+);
+disc.receiveShadow = true;
+scene.add(disc);
+
+// ------------------------------------------------------------------ loading
+const loadFill = $('loadFill');
+const manager = new THREE.LoadingManager();
+manager.onProgress = (u, l, t) => { loadFill.style.width = (100 * l / t) + '%'; };
+const loader = new GLTFLoader(manager);
+
+function loadGLB(url) {
+  return new Promise((res, rej) =>
+    loader.load(url, g => res(g.scene), undefined,
+                () => rej(new Error(`failed to load ${url}`))));
+}
+
+// ------------------------------------------------------------------- state
+let manifest = null;
+let unitScale = 1000;
+let instances = [];          // [{ label, group, mat, basePos, baseRot, explode, window, center }]
+let byLabel = {};
+let motion = null;           // validated manifest.motion (or null)
+let motionKind = 'spin';     // 'crank' | 'spin'
+let cylinders = [];          // resolved crank-slider cylinders
+let crankInst = null;
+let axisMap = null;          // { a, l, u } component names for the crank axis
+
+let asmCenter = new THREE.Vector3();
+let asmRadius = 250;
+let asmGroundZ = -100;
+let asmDist = 900;
+
+let assembly = 1;            // scrub value 0..1
+let assemblyTarget = 1;
+let running = false;
+let rpm = 900;
+let theta = 0;               // crank angle (rad) or turntable angle
+let buildActive = false;
+
+const smooth = t => t * t * (3 - 2 * t);
+const clamp01 = v => Math.min(1, Math.max(0, v));
+const winU = (s, w) => smooth(clamp01((s - w[0]) / Math.max(1e-6, w[1] - w[0])));
+
+function setOpacity(mat, u) {
+  const op = THREE.MathUtils.lerp(0.75, 1, u);
+  mat.opacity = op;
+  mat.transparent = op < 0.999;
+  mat.depthWrite = true;
+}
+
+function makeMaterial(colorHex) {
+  return new THREE.MeshStandardMaterial({
+    color: colorHex, metalness: 0.9, roughness: 0.35, envMapIntensity: 1.0,
+  });
+}
+
+function parseColor(c) {
+  if (typeof c === 'string' && /^#?[0-9a-fA-F]{6}$/.test(c))
+    return parseInt(c.replace('#', ''), 16);
+  return DEFAULT_COLOR;
+}
+
+// wrap a loaded GLB scene: undo exporter Y-up node, scale to manifest units
+function wrapTemplate(template) {
+  const inner = template.clone(true);
+  inner.rotation.x = ORIENT_FIX_X;
+  inner.scale.setScalar(unitScale);
+  return inner;
+}
+
+// -------------------------------------------------------------- kinematics
+// crank-slider (per cylinder, crank angle theta):
+//   phi     = base_angle + theta
+//   pinL    = throw * sin(phi)          (lateral, e.g. Y for axis X)
+//   pinU    = throw * cos(phi)          (up,      e.g. Z for axis X)
+//   smallU  = pinU + sqrt(rod^2 - pinL^2)
+//   pistonU = smallU - pin_bore_z
+//   alpha   = atan2(pinL, smallU - pinU)     rod tilt about the crank axis
+const AXIS_MAP = {
+  X: { a: 'x', l: 'y', u: 'z' },
+  Y: { a: 'y', l: 'x', u: 'z' },
+  Z: { a: 'z', l: 'x', u: 'y' },
+};
+
+function cylKin(cyl, th) {
+  const phi = THREE.MathUtils.degToRad(cyl.base_angle_deg || 0) + th;
+  const T = motion.throw, R = motion.rod;
+  const pinL = T * Math.sin(phi);
+  const pinU = T * Math.cos(phi);
+  const smallU = pinU + Math.sqrt(Math.max(0, R * R - pinL * pinL));
+  const pistonU = smallU - (motion.pin_bore_z ?? 0);
+  const alpha = Math.atan2(pinL, smallU - pinU);
+  const v = (along, lat, up) => {
+    const p = new THREE.Vector3();
+    p[axisMap.a] = along; p[axisMap.l] = lat; p[axisMap.u] = up;
+    return p;
+  };
+  return {
+    rod:    v(cyl.x, pinL, pinU),
+    pin:    v(cyl.x, 0, smallU),
+    piston: v(cyl.x, 0, pistonU),
+    alpha,
+  };
+}
+
+// ------------------------------------------------------------------ update
+const tmp = new THREE.Vector3();
+
+function poseInstance(inst, pos, u) {
+  tmp.copy(pos).addScaledVector(inst.explode, 1 - u);
+  inst.group.position.copy(tmp);
+  setOpacity(inst.mat, u);
+}
+
+function updateAssembly() {
+  const s = assembly;
+
+  // driven instances get exact kinematic poses (+ per-instance delta so the
+  // manifest's assembled placement is reproduced exactly at theta = 0)
+  const driven = new Set();
+
+  if (motionKind === 'crank' && crankInst) {
+    driven.add(crankInst.label);
+    const u = winU(s, crankInst.window);
+    poseInstance(crankInst, crankInst.basePos, u);
+    crankInst.group.rotation.copy(crankInst.baseRot);
+    crankInst.group.rotation[axisMap.a] += CRANK_SPIN_SIGN * theta;
+
+    for (const c of cylinders) {
+      const k = cylKin(c, theta);
+      for (const d of c.parts) {          // { inst, role, delta }
+        driven.add(d.inst.label);
+        const u2 = winU(s, d.inst.window);
+        tmp.copy(k[d.role === 'ring' ? 'piston' : d.role]).add(d.delta);
+        poseInstance(d.inst, tmp.clone(), u2);
+        d.inst.group.rotation.copy(d.inst.baseRot);
+        if (d.role === 'rod')             // rod + cap tilt about the crank axis
+          d.inst.group.rotation[axisMap.a] += k.alpha * u2;
+      }
+    }
+  }
+
+  for (const inst of instances) {
+    if (driven.has(inst.label)) continue;
+    poseInstance(inst, inst.basePos, winU(s, inst.window));
+    inst.group.rotation.copy(inst.baseRot);
+  }
+}
+
+// --------------------------------------------------------------------- UI
+const assemblySlider = $('assembly'), assemblyVal = $('assemblyVal');
+const rpmSlider = $('rpm'), rpmVal = $('rpmVal');
+const btnRun = $('btnRun'), btnAuto = $('btnAuto');
+
+assemblySlider.addEventListener('input', () => {
+  assembly = assemblyTarget = parseFloat(assemblySlider.value);
+  assemblyVal.textContent = Math.round(assembly * 100) + '%';
+});
+rpmSlider.addEventListener('input', () => {
+  rpm = parseFloat(rpmSlider.value);
+  rpmVal.textContent = rpm.toFixed(0);
+});
+$('btnExplode').addEventListener('click', () => { assemblyTarget = 0; });
+$('btnAssemble').addEventListener('click', () => { assemblyTarget = 1; });
+btnRun.addEventListener('click', () => {
+  running = !running;
+  btnRun.classList.toggle('active', running);
+  const label = motionKind === 'crank' ? 'Run' : 'Spin';
+  btnRun.innerHTML = running ? `&#9632;&nbsp; Stop` : `&#9654;&nbsp; ${label}`;
+  if (running && motionKind === 'crank') assemblyTarget = 1;  // running implies assembled
+});
+btnAuto.addEventListener('click', () => {
+  controls.autoRotate = !controls.autoRotate;
+  btnAuto.classList.toggle('active', controls.autoRotate);
+});
+$('btnReset').addEventListener('click', () => {
+  if (buildActive) frameCurrentComponent();
+  else controls.reset();
+});
+
+function refreshAssemblyUI() {
+  assemblySlider.value = assembly.toFixed(3);
+  assemblyVal.textContent = Math.round(assembly * 100) + '%';
+}
+
+// ======================================================== build-components
+const buildControls = $('buildControls'), assemblyControls = $('assemblyControls');
+const btnModeAssembly = $('btnModeAssembly'), btnModeBuild = $('btnModeBuild');
+const componentSel = $('componentSel');
+const buildStepSlider = $('buildStep'), buildStepVal = $('buildStepVal');
+const btnPlaySteps = $('btnPlaySteps');
+const buildCaption = $('buildCaption'), buildParams = $('buildParams');
+const timelineEl = $('timeline');
+
+let curComp = null;
+let curStepIdx = 0;
+let stepGroups = [];
+let compMat = null;
+let compFrame = null;        // { dist }
+let buildPlaying = false, playClock = 0;
+let loadToken = 0;
+const savedCam = { pos: new THREE.Vector3(), tgt: new THREE.Vector3(), ok: false };
+
+function buildColorFor(compId) {
+  const inst = (manifest.instances || []).find(i => i.part === compId);
+  return inst ? parseColor(inst.color) : DEFAULT_COLOR;
+}
+
+function disposeSteps() {
+  for (const g of stepGroups) {
+    buildRoot.remove(g);
+    g.traverse(o => { if (o.isMesh) o.geometry.dispose(); });
+  }
+  stepGroups = [];
+  if (compMat) { compMat.dispose(); compMat = null; }
+}
+
+function stopStepPlayback() {
+  buildPlaying = false; playClock = 0;
+  btnPlaySteps.classList.remove('active');
+  btnPlaySteps.innerHTML = '&#9654;&nbsp; Play';
+}
+
+function frameCurrentComponent() {
+  if (!compFrame) return;
+  const dir = new THREE.Vector3(0.72, -0.95, 0.52).normalize();
+  camera.position.copy(dir.multiplyScalar(compFrame.dist));
+  controls.target.set(0, 0, 0);
+  controls.minDistance = compFrame.dist * 0.22;
+  controls.maxDistance = compFrame.dist * 6;
+  controls.update();
+}
+
+async function selectComponent(id) {
+  const token = ++loadToken;
+  stopStepPlayback();
+  disposeSteps();
+  curComp = manifest.build.find(c => c.id === id);
+  buildCaption.innerHTML = 'Loading&hellip;';
+  buildParams.textContent = '';
+  timelineEl.innerHTML = '';
+  const steps = curComp.steps.filter(s => s.glb);
+
+  let scenes;
+  try {
+    scenes = await Promise.all(steps.map(s => loadGLB(s.glb)));
+  } catch (e) { showError(e.message); return; }
+  if (token !== loadToken) return;               // superseded by newer pick
+
+  compMat = makeMaterial(buildColorFor(id));
+  stepGroups = scenes.map(raw => {
+    const outer = new THREE.Group();
+    const inner = wrapTemplate(raw);
+    inner.traverse(o => {
+      if (o.isMesh) { o.material = compMat; o.castShadow = true; o.receiveShadow = true; }
+    });
+    outer.add(inner);
+    outer.visible = false;
+    buildRoot.add(outer);
+    return outer;
+  });
+  curComp = { ...curComp, steps };               // only steps that have a GLB
+
+  // centre every step with ONE offset from the FINAL step's bbox, so the part
+  // stays put while geometry grows; frame the camera once from that bbox too.
+  const last = stepGroups[stepGroups.length - 1];
+  last.visible = true;
+  last.updateMatrixWorld(true);
+  const bb = new THREE.Box3().setFromObject(last);
+  const center = bb.getCenter(new THREE.Vector3());
+  const size = bb.getSize(new THREE.Vector3());
+  last.visible = false;
+  for (const g of stepGroups) g.position.copy(center).negate();
+
+  const radius = Math.max(1e-3, size.length() / 2);
+  const vFov = THREE.MathUtils.degToRad(camera.fov);
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  compFrame = { dist: 1.25 * radius / Math.tan(Math.min(vFov, hFov) / 2) };
+  frameCurrentComponent();
+
+  // scale the ground/disc rig to the part and tuck it under the bottom face
+  const gz = -size.z / 2 - Math.max(1, radius * 0.02);
+  ground.position.z = gz;       ground.scale.setScalar(radius * 12);
+  disc.position.z   = gz - radius * 0.004 - 0.2;
+  disc.scale.setScalar(radius * 4);
+
+  // timeline
+  curComp.steps.forEach((s, i) => {
+    const li = document.createElement('li');
+    li.textContent = `${i + 1}. ${s.feature}`;
+    li.addEventListener('click', () => { stopStepPlayback(); setStep(i); });
+    timelineEl.appendChild(li);
+  });
+  buildStepSlider.min = 0;
+  buildStepSlider.max = Math.max(0, curComp.steps.length - 1);
+  setStep(0);
+}
+
+function setStep(i) {
+  if (!curComp || !stepGroups.length) return;
+  curStepIdx = THREE.MathUtils.clamp(i, 0, stepGroups.length - 1);
+  stepGroups.forEach((g, k) => { g.visible = (k === curStepIdx); });
+
+  const s = curComp.steps[curStepIdx], n = curComp.steps.length;
+  buildStepSlider.value = curStepIdx;
+  buildStepVal.textContent = `${curStepIdx + 1}/${n}`;
+  buildCaption.innerHTML =
+    `step ${curStepIdx + 1}/${n} &middot; <span class="feat"></span> <span style="color:var(--text-dim)">(${s.operation ?? ''})</span>`;
+  buildCaption.querySelector('.feat').textContent = s.feature ?? '';
+  buildParams.textContent = Object.entries(s.params ?? {})
+    .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`).join('  ·  ');
+  [...timelineEl.children].forEach((li, k) => {
+    li.classList.toggle('current', k === curStepIdx);
+    li.classList.toggle('done', k < curStepIdx);
+  });
+}
+
+componentSel.addEventListener('change', () => selectComponent(componentSel.value));
+buildStepSlider.addEventListener('input', () => {
+  stopStepPlayback();
+  setStep(parseInt(buildStepSlider.value, 10));
+});
+$('btnPrevStep').addEventListener('click', () => { stopStepPlayback(); setStep(curStepIdx - 1); });
+$('btnNextStep').addEventListener('click', () => { stopStepPlayback(); setStep(curStepIdx + 1); });
+btnPlaySteps.addEventListener('click', () => {
+  if (buildPlaying) { stopStepPlayback(); return; }
+  if (!stepGroups.length) return;
+  if (curStepIdx >= stepGroups.length - 1) setStep(0);   // replay from start
+  buildPlaying = true; playClock = 0;
+  btnPlaySteps.classList.add('active');
+  btnPlaySteps.innerHTML = '&#9632;&nbsp; Pause';
+});
+
+function setMode(build) {
+  if (build === buildActive) return;
+  buildActive = build;
+  btnModeBuild.classList.toggle('active', build);
+  btnModeAssembly.classList.toggle('active', !build);
+  buildControls.style.display = build ? 'block' : 'none';
+  assemblyControls.style.display = build ? 'none' : 'block';
+  spinPivot.visible = !build;
+  buildRoot.visible = build;
+
+  if (build) {
+    savedCam.pos.copy(camera.position);
+    savedCam.tgt.copy(controls.target);
+    savedCam.ok = true;
+    if (running) btnRun.click();                 // pause motion while building
+    if (!curComp && componentSel.options.length) {
+      componentSel.value = componentSel.options[0].value;
+      selectComponent(componentSel.value);
+    } else if (curComp) {
+      frameCurrentComponent();
+    }
+  } else {
+    stopStepPlayback();
+    ground.position.z = asmGroundZ;      ground.scale.setScalar(asmRadius * 5);
+    disc.position.z   = asmGroundZ - 0.5; disc.scale.setScalar(asmRadius * 2);
+    controls.minDistance = asmDist * 0.15; controls.maxDistance = asmDist * 5;
+    if (savedCam.ok) {
+      camera.position.copy(savedCam.pos);
+      controls.target.copy(savedCam.tgt);
+      controls.update();
+    }
+  }
+}
+btnModeAssembly.addEventListener('click', () => setMode(false));
+btnModeBuild.addEventListener('click', () => setMode(true));
+
+// ------------------------------------------------------------------- boot
+async function boot() {
+  let m;
+  try {
+    const r = await fetch('./viewer.json');
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    m = await r.json();
+  } catch (e) {
+    showError('viewer.json failed to load — ' + e.message +
+              ' — serve this folder over http next to viewer.json.');
+    $('loading').classList.add('done');
+    return;
+  }
+  manifest = m;
+  unitScale = UNIT_SCALE[m.units] ?? 1000;
+
+  document.title = (m.title || 'Assembly') + ' — Interactive Viewer';
+  $('title').textContent = m.title || 'Assembly';
+  $('caption').textContent =
+    `${(m.instances || []).length} parts — drag to orbit, scroll to zoom, right-drag to pan.`;
+
+  // ---- load distinct part meshes ------------------------------------------
+  const templates = {};
+  try {
+    await Promise.all((m.parts || []).map(p =>
+      loadGLB(p.glb).then(s => { templates[p.id] = s; })));
+  } catch (e) {
+    showError(e.message + ' — check the GLB paths referenced by viewer.json.');
+    $('loading').classList.add('done');
+    return;
+  }
+
+  // ---- instantiate the assembly -------------------------------------------
+  for (const spec of (m.instances || [])) {
+    const tpl = templates[spec.part];
+    if (!tpl) { console.warn('instance references unknown part:', spec.part); continue; }
+    const outer = new THREE.Group();
+    const inner = wrapTemplate(tpl);
+    const mat = makeMaterial(parseColor(spec.color));
+    inner.traverse(o => {
+      if (o.isMesh) { o.material = mat; o.castShadow = true; o.receiveShadow = true; }
+    });
+    outer.add(inner);
+    assemblyRoot.add(outer);
+
+    const basePos = new THREE.Vector3(...(spec.pos || [0, 0, 0]));
+    const rd = spec.rot_deg || [0, 0, 0];
+    const baseRot = new THREE.Euler(
+      THREE.MathUtils.degToRad(rd[0]),
+      THREE.MathUtils.degToRad(rd[1]),
+      THREE.MathUtils.degToRad(rd[2]), 'XYZ');
+    outer.position.copy(basePos);
+    outer.rotation.copy(baseRot);
+
+    const inst = {
+      label: spec.label ?? `inst_${instances.length}`,
+      group: outer, mat, basePos, baseRot,
+      explode: new THREE.Vector3(),
+      window: [0, 1],
+      center: new THREE.Vector3(),
+    };
+    instances.push(inst);
+    byLabel[inst.label] = inst;
+  }
+
+  if (!instances.length) {
+    showError('viewer.json has no renderable instances.');
+    $('loading').classList.add('done');
+    return;
+  }
+
+  // ---- auto-frame from the assembled bounding box --------------------------
+  assemblyRoot.updateMatrixWorld(true);
+  const bb = new THREE.Box3().setFromObject(assemblyRoot);
+  bb.getCenter(asmCenter);
+  const size = bb.getSize(new THREE.Vector3());
+  asmRadius = Math.max(1e-3, size.length() / 2);
+
+  // per-instance centres (for explode directions)
+  const ibb = new THREE.Box3();
+  for (const inst of instances) {
+    ibb.setFromObject(inst.group);
+    ibb.getCenter(inst.center);
+  }
+
+  // camera / controls
+  const vFov = THREE.MathUtils.degToRad(camera.fov);
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  asmDist = 1.35 * asmRadius / Math.tan(Math.min(vFov, hFov) / 2);
+  const camDir = new THREE.Vector3(0.72, -0.95, 0.52).normalize();
+  camera.position.copy(asmCenter).addScaledVector(camDir, asmDist);
+  camera.near = Math.max(0.01, asmDist / 500);
+  camera.far = asmDist * 20;
+  camera.updateProjectionMatrix();
+  controls.target.copy(asmCenter);
+  controls.minDistance = asmDist * 0.15;
+  controls.maxDistance = asmDist * 5;
+  controls.update();
+  controls.saveState();
+
+  // spin pivot about the assembly centre (world poses unchanged)
+  spinPivot.position.copy(asmCenter);
+  assemblyRoot.position.copy(asmCenter).negate();
+
+  // lights + shadow camera scaled to the model
+  const L = asmRadius;
+  key.position.copy(asmCenter).add(new THREE.Vector3(1.0, -0.87, 1.73).multiplyScalar(L * 1.8));
+  key.target.position.copy(asmCenter);
+  key.shadow.camera.left = -1.6 * L; key.shadow.camera.right = 1.6 * L;
+  key.shadow.camera.top = 1.6 * L;   key.shadow.camera.bottom = -1.6 * L;
+  key.shadow.camera.near = 0.1 * L;  key.shadow.camera.far = 8 * L;
+  key.shadow.camera.updateProjectionMatrix();
+  fill.position.copy(asmCenter).add(new THREE.Vector3(-1.17, 1.0, 0.6).multiplyScalar(L * 1.5));
+  rim.position.copy(asmCenter).add(new THREE.Vector3(-0.5, -1.33, -0.33).multiplyScalar(L * 1.5));
+
+  // ground/disc under the assembly
+  asmGroundZ = bb.min.z - Math.max(1, 0.02 * L);
+  ground.position.set(asmCenter.x, asmCenter.y, asmGroundZ);
+  ground.scale.setScalar(L * 5);
+  disc.position.set(asmCenter.x, asmCenter.y, asmGroundZ - 0.5);
+  disc.scale.setScalar(L * 2);
+
+  // ---- explode staggering from assembly_stages -----------------------------
+  const stages = m.assembly_stages || [];
+  const K = Math.max(1, stages.length);
+  const stageOf = {};
+  stages.forEach((st, k) => (st.labels || []).forEach(lb => { stageOf[lb] = k; }));
+  const stageCursor = {};                    // per-stage index for radial fan-out
+  for (const inst of instances) {
+    const k = stageOf[inst.label];
+    inst.window = (k === undefined) ? [0, 1] : [k / K, (k + 1) / K];
+    const j = (stageCursor[k ?? -1] = (stageCursor[k ?? -1] ?? 0) + 1) - 1;
+    const d = inst.center.clone().sub(asmCenter);
+    if (d.length() > 1e-4) {
+      const dir = d.clone().normalize();
+      inst.explode.copy(d).multiplyScalar(0.9)
+        .addScaledVector(dir, L * (0.25 + 0.06 * j));   // fan stacked parts apart
+    }
+  }
+
+  // ---- motion --------------------------------------------------------------
+  motion = m.motion || null;
+  if (motion && motion.type === 'crank_slider' && byLabel[motion.crank]) {
+    motionKind = 'crank';
+    axisMap = AXIS_MAP[(motion.axis || 'X').toUpperCase()] || AXIS_MAP.X;
+    crankInst = byLabel[motion.crank];
+    for (const c of (motion.cylinders || [])) {
+      const k0 = cylKin(c, 0);
+      const parts = [];
+      const attach = (label, role) => {
+        const inst = byLabel[label];
+        if (!inst) return;
+        const kin = k0[role === 'ring' ? 'piston' : role];
+        parts.push({ inst, role, delta: inst.basePos.clone().sub(kin) });
+      };
+      attach(c.rod, 'rod');
+      attach(c.cap, 'rod');                  // cap rides the rod's big end
+      attach(c.pin, 'pin');
+      attach(c.piston, 'piston');
+      for (const r of (c.rings || [])) attach(r, 'ring');
+      if (parts.length) cylinders.push({ ...c, parts });
+    }
+    if (!cylinders.length) { motionKind = 'spin'; crankInst = null; }
+  } else {
+    motionKind = 'spin';                     // motion null or type "spin"
+  }
+  if (motionKind !== 'crank') {
+    $('rpmRow').style.display = 'none';      // hide crank-slider specifics
+    btnRun.innerHTML = '&#9654;&nbsp; Spin';
+  } else {
+    btnRun.innerHTML = '&#9654;&nbsp; Run';
+  }
+
+  // ---- build mode availability ---------------------------------------------
+  const buildable = (m.build || []).filter(c => (c.steps || []).some(s => s.glb));
+  manifest.build = buildable;
+  if (!buildable.length) {
+    btnModeBuild.disabled = true;
+  } else {
+    for (const c of buildable) {
+      const opt = document.createElement('option');
+      opt.value = c.id; opt.textContent = c.title || c.id;
+      componentSel.appendChild(opt);
+    }
+  }
+
+  updateAssembly();
+  $('loading').classList.add('done');
+}
+boot();
+
+// -------------------------------------------------------------------- loop
+const clock = new THREE.Clock();
+function tick() {
+  requestAnimationFrame(tick);
+  const rawDt = clock.getDelta();
+  const dt = Math.min(rawDt, 0.05);
+
+  if (running && !buildActive) {
+    if (motionKind === 'crank') theta += rpm * Math.PI * 2 / 60 * dt;
+    else spinPivot.rotation.z += 0.45 * dt;          // turntable
+  }
+
+  // build-mode playback: one feature per STEP_HOLD_S, hold on the final step
+  if (buildActive && buildPlaying) {
+    playClock += rawDt;
+    while (playClock >= STEP_HOLD_S && buildPlaying) {
+      playClock -= STEP_HOLD_S;
+      setStep(curStepIdx + 1);
+      if (curStepIdx >= stepGroups.length - 1) stopStepPlayback();
+    }
+  }
+
+  // tween assembly toward target (~2.6 s full sweep)
+  if (assembly !== assemblyTarget) {
+    const dir = Math.sign(assemblyTarget - assembly);
+    assembly = clamp01(assembly + dir * dt / 2.6);
+    if (dir > 0) assembly = Math.min(assembly, assemblyTarget);
+    else         assembly = Math.max(assembly, assemblyTarget);
+    refreshAssemblyUI();
+  }
+
+  if (instances.length) updateAssembly();
+  controls.update();
+  renderer.render(scene, camera);
+}
+tick();
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>
