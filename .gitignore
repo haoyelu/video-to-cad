@@ -29,3 +29,9 @@ build_steps/
 viz_out/
 *.record.json
 viewer.json
+
+# OS cruft
+.DS_Store
+
+# run output directories
+agqX/
