@@ -45,6 +45,7 @@ templates/
   viewer.html                # manifest-driven interactive 3D viewer
 references/
   end-to-end.md              # video link -> interactive HTML (full procedure)
+  model-routing.md           # cheap-vs-frontier model per pipeline stage
   orchestration.md           # Mode B: recursive segment -> build -> compose
   refine-loop.md             # RL-style closed-loop refinement
   visualization.md           # trajectory -> animations + viewer

@@ -29,3 +29,5 @@ build_steps/
 viz_out/
 *.record.json
 viewer.json
+
+.DS_Store

@@ -19,6 +19,17 @@ for the actual geometry generation and review.
 for the end-to-end procedure and commands (download → reconstruct → `export_viz`
 → `make_animation` / `viewer.html`), with the LLM-vs-deterministic breakdown.
 
+## Cost / model routing (quality-first hybrid)
+Each LLM stage can run on a **cheap/open** model except the ones that decide
+fidelity. Route perception + easy code-gen to cheap models (qwen3-vl-8b,
+qwen3.6-flash, llama-4-scout), and keep a **frontier** model (Opus/Sonnet) on the
+three seams cheap models provably fail: **revolve/loft/assembly code-gen**,
+**mate/reconcile**, and the **refine loop**. Do NOT run a fully-cheap
+end-to-end pass — errors compound (a vision misread feeds an unrepairable code
+error). For dimension reading, use **two different cheap vision models and
+reconcile** (their misses differ) rather than one. Full routing table + model
+notes: `references/model-routing.md`.
+
 ## Choose a mode first
 - **Mode A — single part / simple model:** run the workflow below end-to-end.
 - **Mode B — assembly or long multi-component tutorial (RECURSIVE
@@ -135,6 +146,13 @@ Feature names also disambiguate operations the viewport is ambiguous about
 MISSED" section. Then synthesize. See `references/frame-reader-prompt.md` for the
 exact subagent prompt to reuse.
 
+**Model routing (perception is cheap, with a trick).** Frame reading runs well on
+cheap vision models — but no single cheap model reads a dense dimension sheet
+completely. Send each dimension-dense frame to **two different** cheap vision
+models and **reconcile** (their misses differ; prefer values consistent with the
+part's other dims / its mating interface). This recovers most of the frontier gap
+cheaply. See `references/model-routing.md`.
+
 ### 4. Write the timestamped build log
 Produce a markdown file (`<part>_build_process.md`) using
 `references/build-log-template.md`. One row per action:
@@ -146,6 +164,13 @@ the code's operation order.
 ### 5. Generate the CAD code (invoke the `cad` skill)
 Write a build123d generator (`<part>.py` with `def gen_step(): ...`) that mirrors
 the feature tree.
+
+**Model routing.** Easy generators (extrude / hole / prism / boss) run fine on a
+cheap model (qwen3.6-flash, qwen3-vl-8b). But **revolve, loft, sweep, and
+`AssemblyHelper` mates must go to a frontier model** — every cheap/open model
+failed these in benchmarking, and they are exactly what bodies of revolution,
+wings/blades/hulls, and assemblies need. Same for the compose/mate/reconcile step
+(step below) and the refine loop (step 6/7). See `references/model-routing.md`.
 
 **Scale the ambition to the model's complexity (do this triage first).**
 Many tutorials build far more than a single tractable part (dozens of bodies,
