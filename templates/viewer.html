@@ -345,6 +345,7 @@ let byLabel = {};
 let motion = null;           // validated manifest.motion (or null)
 let motionKind = 'spin';     // 'crank' | 'spin'
 let cylinders = [];          // resolved crank-slider cylinders
+let gearBodies = [];         // resolved gear-train bodies [{inst, ratio}]
 let crankInst = null;
 let axisMap = null;          // { a, l, u } component names for the crank axis
 
@@ -463,6 +464,16 @@ function updateAssembly() {
     }
   }
 
+  if (motionKind === 'gears') {
+    for (const g of gearBodies) {
+      driven.add(g.inst.label);
+      const u = winU(s, g.inst.window);
+      poseInstance(g.inst, g.inst.basePos, u);
+      g.inst.group.rotation.copy(g.inst.baseRot);
+      g.inst.group.rotation[axisMap.a] += g.ratio * theta;
+    }
+  }
+
   for (const inst of instances) {
     if (driven.has(inst.label)) continue;
     poseInstance(inst, inst.basePos, winU(s, inst.window));
@@ -488,9 +499,9 @@ $('btnAssemble').addEventListener('click', () => { assemblyTarget = 1; });
 btnRun.addEventListener('click', () => {
   running = !running;
   btnRun.classList.toggle('active', running);
-  const label = motionKind === 'crank' ? 'Run' : 'Spin';
+  const label = motionKind === 'spin' ? 'Spin' : 'Run';
   btnRun.innerHTML = running ? `&#9632;&nbsp; Stop` : `&#9654;&nbsp; ${label}`;
-  if (running && motionKind === 'crank') assemblyTarget = 1;  // running implies assembled
+  if (running && motionKind !== 'spin') assemblyTarget = 1;  // running implies assembled
 });
 btnAuto.addEventListener('click', () => {
   controls.autoRotate = !controls.autoRotate;
@@ -853,11 +864,21 @@ async function boot() {
       if (parts.length) cylinders.push({ ...c, parts });
     }
     if (!cylinders.length) { motionKind = 'spin'; crankInst = null; }
+  } else if (motion && motion.type === 'gear_train') {
+    // Each body spins about its own axis at a signed ratio of the input speed.
+    motionKind = 'gears';
+    axisMap = AXIS_MAP[(motion.axis || 'Z').toUpperCase()] || AXIS_MAP.X;
+    for (const b of (motion.bodies || [])) {
+      const inst = byLabel[b.label];
+      if (inst) gearBodies.push({ inst, ratio: Number(b.ratio) || 0 });
+    }
+    if (!gearBodies.length) motionKind = 'spin';
+    if (motion.rpm) { rpm = motion.rpm; rpmSlider.value = rpm; rpmVal.textContent = rpm.toFixed(0); }
   } else {
     motionKind = 'spin';                     // motion null or type "spin"
   }
-  if (motionKind !== 'crank') {
-    $('rpmRow').style.display = 'none';      // hide crank-slider specifics
+  if (motionKind === 'spin') {
+    $('rpmRow').style.display = 'none';      // hide speed control for turntable
     btnRun.innerHTML = '&#9654;&nbsp; Spin';
   } else {
     btnRun.innerHTML = '&#9654;&nbsp; Run';
@@ -889,7 +910,8 @@ function tick() {
   const dt = Math.min(rawDt, 0.05);
 
   if (running && !buildActive) {
-    if (motionKind === 'crank') theta += rpm * Math.PI * 2 / 60 * dt;
+    if (motionKind === 'crank' || motionKind === 'gears')
+      theta += rpm * Math.PI * 2 / 60 * dt;
     else spinPivot.rotation.z += 0.45 * dt;          // turntable
   }
 

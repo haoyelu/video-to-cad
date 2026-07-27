@@ -15,7 +15,9 @@ deterministic scripts.
    │    Mode A (one part) or Mode B (segment→build→compose, recursive)
    ▼
  parts/<id>.py  (parametric gen_step) + assembly kinematics
-   │  viz_spec.py (thin mapping, ~30 lines)             [small LLM/human glue]
+   │  check_model.py  ── loose parts / wall penetration / interference
+   │                     [deterministic, SECONDS — always run before the tail]
+   │  viz_spec.py + <part>_build.py (BUILD is required)  [small LLM/human glue]
    ▼
  export_viz.py ──▶ viewer.json + GLBs + build steps + asm stages   [deterministic]
    ├─ make_animation.py ─▶ exploded.png + build_assemble.gif       [deterministic]
@@ -39,6 +41,10 @@ export PYTHONPATH=$CAD/scripts/packages/cadpy/src        # use a python that has
 yt-dlp --no-playlist -f "bestvideo[height<=720]+bestaudio/best" \
        --merge-output-format mp4 -o src.mp4 "<VIDEO_LINK>"
 
+# 1b) frames. Use extract_at.sh (exact -ss) for anything you will TIMESTAMP —
+#     the fps= filter drifts on variable-frame-rate sources. See SKILL.md step 2.
+bash $SK/scripts/extract_at.sh src.mp4 frames 0 150 9300
+
 # 2) RECONSTRUCT (the LLM stage — run this skill on src.mp4)
 #    Follow SKILL.md: extract frames -> read/transcribe features+dims ->
 #    trace ortho views -> write parts/<id>.py (gen_step) -> compose ->
@@ -49,7 +55,11 @@ yt-dlp --no-playlist -f "bestvideo[height<=720]+bestaudio/best" \
 #    PARTS = {id: gen_step}; INSTANCES = [{part,label,pos,rot_deg,color}];
 #    optional STAGES, BUILD (per-feature), MOTION.  See references/visualization.md.
 
+# 3b) VALIDATE before the expensive tail                 [deterministic, seconds]
+python $SK/scripts/check_model.py parts/model.py --shell <housing_label>
+
 # 4) trajectory -> GLBs + viewer.json                    [deterministic]
+#    errors out unless viz_spec defines BUILD (--allow-no-build to override)
 python $SK/scripts/export_viz.py viz_spec.py --out web
 
 # 5) animations (optional)                               [deterministic]

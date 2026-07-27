@@ -44,6 +44,8 @@ def _load(spec_path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("spec"); ap.add_argument("--out", required=True)
+    ap.add_argument("--allow-no-build", action="store_true",
+                    help="permit a spec with no BUILD sequences (assembly-only export)")
     a = ap.parse_args()
     from build123d import export_gltf, export_step, Compound, Location
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # for build_recorder
@@ -64,9 +66,23 @@ def main():
         parts_man.append({"id": pid, "glb": rel})
     print(f"parts: {len(parts_man)}")
 
-    # 2) per-feature build sequences (optional) -> build_steps/ + steps in manifest
+    # 2) per-feature build sequences -> build_steps/ + steps in manifest
+    #    REQUIRED: without BUILD the viewer's "Build components" mode is dead and
+    #    the reconstruction ships half-empty. Pass --allow-no-build only for a
+    #    deliberate assembly-only export.
+    build_spec = getattr(m, "BUILD", {}) or {}
+    if not build_spec and not a.allow_no_build:
+        sys.exit(
+            "export_viz: spec defines no BUILD sequences.\n"
+            "  The viewer's 'Build components' mode needs BUILD = {part_id: "
+            "[(feature, operation, params, cumulative_solid), ...]}.\n"
+            "  Cover every part with more than one feature, naming features after "
+            "the source CAD tool's own tree (Boss-Extrude1, Cut-Revolve1, ...).\n"
+            "  Re-run with --allow-no-build only if an assembly-only export is "
+            "genuinely intended."
+        )
     build_man = []
-    for cid, feats in getattr(m, "BUILD", {}).items():
+    for cid, feats in build_spec.items():
         rec = BuildRecorder(cid, os.path.join(out, "build_steps"),
                             units=units, glb=True)
         for k, entry in enumerate(feats, 1):

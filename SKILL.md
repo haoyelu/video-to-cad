@@ -19,6 +19,17 @@ for the actual geometry generation and review.
 for the end-to-end procedure and commands (download → reconstruct → `export_viz`
 → `make_animation` / `viewer.html`), with the LLM-vs-deterministic breakdown.
 
+## Cost / model routing (quality-first hybrid)
+Each LLM stage can run on a **cheap/open** model except the ones that decide
+fidelity. Route perception + easy code-gen to cheap models (qwen3-vl-8b,
+qwen3.6-flash, llama-4-scout), and keep a **frontier** model (Opus/Sonnet) on the
+three seams cheap models provably fail: **revolve/loft/assembly code-gen**,
+**mate/reconcile**, and the **refine loop**. Do NOT run a fully-cheap
+end-to-end pass — errors compound (a vision misread feeds an unrepairable code
+error). For dimension reading, use **two different cheap vision models and
+reconcile** (their misses differ) rather than one. Full routing table + model
+notes: `references/model-routing.md`.
+
 ## Choose a mode first
 - **Mode A — single part / simple model:** run the workflow below end-to-end.
 - **Mode B — assembly or long multi-component tutorial (RECURSIVE
@@ -73,8 +84,21 @@ for the end-to-end procedure and commands (download → reconstruct → `export_
 - Read metadata: `ffprobe -v error -show_entries format=duration -show_entries stream=width,height,r_frame_rate <file>`.
 
 ### 2. Two-pass frame extraction
-Use `scripts/extract_frames.sh` (wraps ffmpeg). Extract to a scratch folder you
-delete at the end.
+
+> **Timestamps must come from exact `-ss` seeks — verify this before logging anything.**
+> `extract_frames.sh` uses ffmpeg's `fps=1/N` filter, which assumes a constant
+> frame rate. Most screen recordings and long YouTube uploads are **variable**
+> frame rate, and the filter's output then drifts from real time. On a 2.5 h
+> capture the drift exceeded a full sampling interval, silently making *every*
+> logged timestamp wrong. Use `scripts/extract_at.sh` (exact `-ss`, frames named
+> by timestamp) for any frame whose time you will write into the build log.
+> **Cross-check once, cheaply:** pull the same timestamp with both scripts; if
+> the images differ, the fps-filter pass is unusable — discard it, do not try to
+> compute an offset. Fixed-interval `fps=` output is still fine for *browsing*
+> content, just never for timing.
+
+Use `scripts/extract_frames.sh` (wraps ffmpeg) for browsing, `extract_at.sh` for
+anything timestamped. Extract to a scratch folder you delete at the end.
 - **Overview pass** — one frame every ~30 s to learn the tool, the overall
   feature order, and where the real build starts (tutorials often open with a
   finished-model preview montage; the real build usually starts when a blank
@@ -135,6 +159,13 @@ Feature names also disambiguate operations the viewport is ambiguous about
 MISSED" section. Then synthesize. See `references/frame-reader-prompt.md` for the
 exact subagent prompt to reuse.
 
+**Model routing (perception is cheap, with a trick).** Frame reading runs well on
+cheap vision models — but no single cheap model reads a dense dimension sheet
+completely. Send each dimension-dense frame to **two different** cheap vision
+models and **reconcile** (their misses differ; prefer values consistent with the
+part's other dims / its mating interface). This recovers most of the frontier gap
+cheaply. See `references/model-routing.md`.
+
 ### 4. Write the timestamped build log
 Produce a markdown file (`<part>_build_process.md`) using
 `references/build-log-template.md`. One row per action:
@@ -146,6 +177,13 @@ the code's operation order.
 ### 5. Generate the CAD code (invoke the `cad` skill)
 Write a build123d generator (`<part>.py` with `def gen_step(): ...`) that mirrors
 the feature tree.
+
+**Model routing.** Easy generators (extrude / hole / prism / boss) run fine on a
+cheap model (qwen3.6-flash, qwen3-vl-8b). But **revolve, loft, sweep, and
+`AssemblyHelper` mates must go to a frontier model** — every cheap/open model
+failed these in benchmarking, and they are exactly what bodies of revolution,
+wings/blades/hulls, and assemblies need. Same for the compose/mate/reconcile step
+(step below) and the refine loop (step 6/7). See `references/model-routing.md`.
 
 **Scale the ambition to the model's complexity (do this triage first).**
 Many tutorials build far more than a single tractable part (dozens of bodies,
@@ -193,6 +231,15 @@ Guidance:
   approximation. See `references/cad-patterns.md` for reusable build123d
   helpers (airfoil, nacelle loft, planes, window pockets).
 - Put every legible dimension in a **named parameter**.
+- **Solve derived constants IN CODE from the measured ones — never hand-pick a
+  value that "comes out about right".** If a module/helix/scale factor is chosen
+  so some feature matches a measurement, write that inversion as an expression
+  (`MT = (TIP_DIA - 2*MODULE)/Z; HELIX = degrees(acos(MODULE/MT))`), not as a
+  rounded literal. A hand-tuned literal drifts from the measurement by exactly
+  the amount you rounded, the model no longer reproduces the number you claimed,
+  and nothing catches it — in one run this shipped an 82.23 mm gear against a
+  measured 82.22 mm and was only noticed when a viewer caption printed it back.
+  Then **assert** it: `assert abs(gen().bounding_box().size.X - TIP_DIA) < 0.01`.
 - Where the video derives geometry from angled reference planes whose exact math
   is ambiguous on screen, reconstruct placement to look correct but keep the
   **exact cross-section dimensions**; say so explicitly in a caveat.
@@ -200,6 +247,26 @@ Guidance:
   features as shallow patterned pocket cuts).
 
 ### 6. Validate, snapshot, review
+
+> **Run the cheap geometry checks BEFORE anything that renders.** Ordering is the
+> single biggest time sink in this pipeline. `export_viz.py` regenerates every
+> GLB and assembly STEP; `make_animation.py` renders dozens of frames — minutes
+> each, and they get re-run in full every time an upstream parameter moves. Every
+> defect they reveal is one that seconds of boolean algebra would have revealed
+> first, so **do not let a render be your first correctness signal.**
+>
+> ```
+> python <skill>/scripts/check_model.py <part>.py \
+>        --shell transmission_case --shell rear_extension
+> ```
+> Checks (a) every occurrence is exactly one solid — catches booleans that
+> silently did not fuse and cuts that severed a body; (b) **wall penetration** —
+> parts sharing volume with a named housing, i.e. a missing bore or an undersized
+> or too-short case; (c) ranked pairwise interference — some is by design (a
+> spline in its sleeve, a bearing in its bore; whitelist with `--ignore A:B`) but
+> **clashing gear teeth are not**. Fix everything it reports, *then* export and
+> animate once.
+
 - Generate: `python <cad-skill>/scripts/step <part>.py` (set
   `PYTHONPATH=<cad-skill>/scripts/packages/cadpy/src` if the launcher can't
   import `cadpy`).
@@ -281,6 +348,24 @@ honestly rather than overselling "recognizable" as "faithful".
   `iso` plus an explicit `azimuth:elevation` (e.g. `"90:12"`) for a broadside.
 - **Fillet fails** — radius exceeds local geometry; shrink it, keep fillets last,
   and wrap in `try/except` so one bad edge doesn't abort the whole model.
+- **Meshing gears interpenetrate** — two causes, both needed. (a) An external
+  pair must be **opposite hand**: cut the mating gear at `beta=-HELIX`. (b) The
+  teeth must be **indexed** — where one gear has a tooth on the line of centres
+  the other needs a gap. Give the gear generator a `phase` argument: driver
+  `phase = 270 + 180/z` (gap facing the partner), partner `phase = 90` (tooth
+  facing back). A rigid gear *cluster* shares one phase, so phase the
+  free-running gears to suit the cluster, not the reverse. Verify numerically —
+  `(gearA & gearB).volume` must be ~0, don't eyeball a render.
+- **A cut orphans features added later** — order matters. Cutting slots through a
+  rim *before* adding the spline teeth that sit over those slots leaves the teeth
+  floating as separate solids. Add material first, subtract last.
+- **A groove/raceway severs its ring** — a torus or slot deeper than the wall
+  splits the body in two. Clamp the depth to the wall: `groove = min(want,
+  wall*0.3)`.
+- **An enclosure is too small / too short** — never guess a housing's size. Derive
+  it from the contents' real envelope (max tip radii, shaft centres, the rearmost
+  feature's z) and build the housing **in assembly coordinates** so its bores
+  land on the true axes. `check_model.py --shell <label>` catches what's left.
 
 ## Worked examples (in this environment)
 - **MD-11 airliner** — revolve fuselage + lofted wings/stabs/fin + tail engine +
@@ -304,9 +389,9 @@ raises the reward; repeat per component, bottom-up, until aligned. When a miss i
 the skill is the durable policy that should get better every run. Full algorithm:
 `references/refine-loop.md`.
 
-### 8. Visualization (optional, fully scriptable)
+### 8. Visualization (fully scriptable)
 Once the model exists, the visual artifacts are deterministic — no bespoke code.
-Write a thin `viz_spec.py` (part generators + assembly placement + optional
+Write a thin `viz_spec.py` (part generators + assembly placement + **required**
 per-feature `BUILD` + optional `MOTION`), then:
 `export_viz.py viz_spec.py --out web` → GLBs + build steps + `viewer.json`;
 `make_animation.py web` → exploded.png + build+assemble GIF;
@@ -314,13 +399,45 @@ per-feature `BUILD` + optional `MOTION`), then:
 (Assembly / Build components / Run). Full guide + schemas + the exact-vs-supplied
 line (mechanism motion needs a MOTION spec): `references/visualization.md`.
 
+**`BUILD` is REQUIRED, not optional.** The viewer has three modes; shipping
+without `BUILD` greys out a third of the deliverable, and `export_viz.py` now
+hard-errors unless you pass `--allow-no-build`. Provide a build sequence for
+**every part with more than one feature** — a list of
+`(feature, operation, params, cumulative_solid)` where the solid is the state
+*after* that feature. Keep it in its own module (`<part>_build.py`) so the part
+generators stay clean, and **name features after the source CAD tool's own tree**
+(`Boss-Extrude1`, `Cut-Revolve1`, `CirPattern1`, `Loft1`) — you transcribed that
+tree in step 3, so the viewer's captions then line up with what the video shows.
+Put the driving dimensions in `params`; they render as the step caption and are
+the cheapest place to notice a wrong number (a caption is what exposed a
+hand-picked helix angle that no render had revealed).
+
+**Exploded stills: pick the axis to match the part.** `make_animation.py` explodes
+along Z, which turns a long assembly into an unreadable thread. For anything
+whose length dominates, re-render the still radially and overwrite it — and note
+that re-running `make_animation.py` overwrites `exploded.png` again, so do it
+last:
+```
+snapshot --input web/asm/asm_<last>.step --output web/exploded.png --camera 35:22 \
+  --display '{"mode":"rendered","exploded":{"enabled":true,"axis":"radial","spacing":0.9}}'
+```
+
 ## Deliverables (report all in the final message)
 - `<part>_build_process.md` — timestamp-aligned build log.
 - `<part>.py` — build123d generator (one function per feature, timestamped).
+- `<part>_build.py` — the per-feature `BUILD` sequences (required, see step 8).
 - `<part>.step` — validated STEP solid.
+- `web/` — `viewer.html` + `viewer.json` + GLBs, with **all three viewer modes
+  live** (Assembly / Build components / Run), plus `exploded.png` and the GIF.
 - Verification snapshots + the `cad-viewer` link.
 - A short caveats list: sampling tolerance, exact-vs-reconstructed dimensions,
   toolkit substitutions.
+
+**Before reporting done, confirm each of these actually ran** — say what passed,
+and say plainly what didn't:
+`check_model.py` clean · `inspect refs --facts` 0 warnings · every measured
+dimension reproduced by the solid (not just by a comment) · the viewer opened in
+a browser with **all three modes exercised**, not merely served.
 
 ## Non-negotiables
 - Timestamps map to the **state visible on screen**, at the stated sampling

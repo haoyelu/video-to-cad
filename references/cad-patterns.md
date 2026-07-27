@@ -215,3 +215,65 @@ part.color = Color(192/255, 192/255, 192/255)  # match the video's appearance
   the strut/embed the root, don't force a compound.
 - Reproduce **exact section shapes and dimensions**; reconstruct only the
   placement that the video's angled reference planes make ambiguous, and say so.
+
+## Meshing gear pairs (helical or spur)
+
+A gear train reconstructed the naive way *looks* right and is geometrically
+wrong: the teeth occupy the same space. Two independent things must both hold.
+
+**1. Opposite helix hand.** Two external helical gears in mesh are one RH and one
+LH. Cut the partner with a negated helix: `gear(z2, face, beta=-HELIX)`.
+
+**2. Tooth indexing (phase).** Where one gear has a tooth on the line of centres,
+the other must have a gap. Give the generator a `phase` (degrees) that offsets
+every tooth, and apply it to the section sketches:
+
+```python
+with PolarLocations(0, z, start_angle=phase + twist_at_this_section):
+    Polygon(*tooth, align=None)
+```
+
+With the partner at `-Y` (a counter shaft below the main shaft):
+
+```python
+def mesh_phase_main(z):     return 270.0 + 180.0 / z   # gap faces the partner
+def mesh_phase_counter():   return 90.0               # tooth faces back
+```
+
+A rigid gear **cluster** is one part and therefore has one phase — so phase the
+free-running gears to suit the cluster, never the reverse.
+
+**Verify numerically; a render will not show this.**
+
+```python
+overlap = (gear_a & (Location((0, -CD, 0)) * gear_b)).volume   # must be ~0
+```
+
+**Centre distance and tooth counts.** Every pair on the same shaft centres shares
+`z1 + z2`. Pick that total once, then each ratio is just a split of it:
+`CD = mt * (z1 + z2) / 2`, `mt = m / cos(beta)`. Solve `mt` (and hence `beta`)
+from a measured tip diameter rather than choosing it: `mt = (tip - 2m) / z`.
+
+**Locating an idler that must mesh with two gears** — solve, don't eyeball. Its
+centre is the intersection of two circles:
+
+```python
+d1 = mt * (z_idler + z_a) / 2      # from gear A at the origin
+d2 = mt * (z_idler + z_b) / 2      # from gear B at (0, -CD)
+y  = (d1**2 - d2**2 - CD**2) / (2 * CD)
+x  = -math.sqrt(d1**2 - y**2)
+```
+An idler can only be phased to mesh exactly with **one** of its two partners;
+say which in the caveats.
+
+## Housings that enclose a mechanism
+
+- **Derive the envelope, never guess it.** Compute the contents' real extents
+  (max tip radii, shaft centres, the rearmost feature's z, plus anything like a
+  shift rail that lives in the roof) and size the shell from that.
+- **Build the housing in ASSEMBLY coordinates**, not centred on its own origin,
+  so its bores land on the true shaft axes and you aren't offsetting it later.
+- **Bores must clear what passes through them** — a bore sized to the shaft will
+  swallow the bearing sitting on it.
+- Check with `check_model.py --shell <label>`: a part sharing volume with the
+  housing is embedded in a wall.
