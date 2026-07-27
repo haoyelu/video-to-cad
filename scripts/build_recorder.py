@@ -23,6 +23,12 @@ Render the per-step STEP files separately if a visual is wanted.
 """
 import os
 import json
+import re
+
+
+def _safe(name):
+    """Feature names become filenames; strip path separators & exotic chars."""
+    return re.sub(r"[^A-Za-z0-9 ._()\-]+", "-", str(name))
 
 
 class BuildRecorder:
@@ -43,7 +49,8 @@ class BuildRecorder:
         """Record one feature. `solid` = the CUMULATIVE result after this feature.
         Returns `solid` so calls can chain."""
         i = len(self.steps) + 1
-        rel = f"{self.name}_s{i:02d}_{feature}.step"
+        safe = _safe(feature)
+        rel = f"{self.name}_s{i:02d}_{safe}.step"
         do_export = self.export if export is None else export
         glb_rel = None
         if do_export:
@@ -51,7 +58,7 @@ class BuildRecorder:
             export_step(solid, os.path.join(self.outdir, rel))
             if self.glb:
                 from build123d import export_gltf
-                glb_rel = f"{self.name}_s{i:02d}_{feature}.glb"
+                glb_rel = f"{self.name}_s{i:02d}_{safe}.glb"
                 try:
                     export_gltf(solid, os.path.join(self.outdir, glb_rel), binary=True)
                 except Exception:

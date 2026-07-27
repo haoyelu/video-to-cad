@@ -69,8 +69,23 @@ def main():
     for cid, feats in getattr(m, "BUILD", {}).items():
         rec = BuildRecorder(cid, os.path.join(out, "build_steps"),
                             units=units, glb=True)
-        for (feature, op, params, solid) in feats:
-            rec.step(solid, feature, op, params)
+        for k, entry in enumerate(feats, 1):
+            # normalize: (feature, op, params, solid) | (feature, op, solid)
+            #            | (feature, solid) | bare solid
+            if isinstance(entry, (tuple, list)):
+                if len(entry) == 4:
+                    feature, op, params, solid = entry
+                elif len(entry) == 3:
+                    feature, op, solid = entry
+                    params = {}
+                elif len(entry) == 2:
+                    feature, solid = entry
+                    op, params = "feature", {}
+                else:
+                    continue
+            else:
+                feature, op, params, solid = f"step {k}", "feature", {}, entry
+            rec.step(solid, feature, op, params or {})
         rec.save()
         steps = [{"step": s["index"], "feature": s["feature"], "operation": s["operation"],
                   "params": s["parameters"],
