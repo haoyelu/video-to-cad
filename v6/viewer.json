@@ -1,0 +1,3406 @@
+{
+  "title": "V6 Turbo Engine (Creo tutorial reconstruction)",
+  "units": "mm",
+  "parts": [
+    {
+      "id": "air_filter",
+      "glb": "parts/air_filter.glb"
+    },
+    {
+      "id": "air_turbo",
+      "glb": "parts/air_turbo.glb"
+    },
+    {
+      "id": "articulated_rod_lower",
+      "glb": "parts/articulated_rod_lower.glb"
+    },
+    {
+      "id": "articulated_rod_upper",
+      "glb": "parts/articulated_rod_upper.glb"
+    },
+    {
+      "id": "belt_wheel_one",
+      "glb": "parts/belt_wheel_one.glb"
+    },
+    {
+      "id": "belt_wheel_two",
+      "glb": "parts/belt_wheel_two.glb"
+    },
+    {
+      "id": "cam_shaft",
+      "glb": "parts/cam_shaft.glb"
+    },
+    {
+      "id": "cam_shaft_bushing",
+      "glb": "parts/cam_shaft_bushing.glb"
+    },
+    {
+      "id": "crank_shaft",
+      "glb": "parts/crank_shaft.glb"
+    },
+    {
+      "id": "crank_shaft_bushing",
+      "glb": "parts/crank_shaft_bushing.glb"
+    },
+    {
+      "id": "cylinder_head",
+      "glb": "parts/cylinder_head.glb"
+    },
+    {
+      "id": "engine_block",
+      "glb": "parts/engine_block.glb"
+    },
+    {
+      "id": "engine_valve",
+      "glb": "parts/engine_valve.glb"
+    },
+    {
+      "id": "exhaust_manifold",
+      "glb": "parts/exhaust_manifold.glb"
+    },
+    {
+      "id": "front_cover",
+      "glb": "parts/front_cover.glb"
+    },
+    {
+      "id": "intake_manifold",
+      "glb": "parts/intake_manifold.glb"
+    },
+    {
+      "id": "oil_pan",
+      "glb": "parts/oil_pan.glb"
+    },
+    {
+      "id": "piston",
+      "glb": "parts/piston.glb"
+    },
+    {
+      "id": "piston_bushing",
+      "glb": "parts/piston_bushing.glb"
+    },
+    {
+      "id": "piston_pin",
+      "glb": "parts/piston_pin.glb"
+    },
+    {
+      "id": "rocker_arm",
+      "glb": "parts/rocker_arm.glb"
+    },
+    {
+      "id": "rocker_arm_bolt",
+      "glb": "parts/rocker_arm_bolt.glb"
+    },
+    {
+      "id": "rocker_arm_pin",
+      "glb": "parts/rocker_arm_pin.glb"
+    },
+    {
+      "id": "rocker_arm_pin_two",
+      "glb": "parts/rocker_arm_pin_two.glb"
+    },
+    {
+      "id": "rocker_arm_roller",
+      "glb": "parts/rocker_arm_roller.glb"
+    },
+    {
+      "id": "rocker_spring",
+      "glb": "parts/rocker_spring.glb"
+    },
+    {
+      "id": "valves_cover",
+      "glb": "parts/valves_cover.glb"
+    }
+  ],
+  "instances": [
+    {
+      "part": "engine_block",
+      "label": "engine_block",
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#bfc2c7"
+    },
+    {
+      "part": "crank_shaft",
+      "label": "crank_shaft",
+      "pos": [
+        19.95,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "crank_shaft_bushing",
+      "label": "crank_shaft_bushing_front",
+      "pos": [
+        -236.005,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "crank_shaft_bushing",
+      "label": "crank_shaft_bushing_rear",
+      "pos": [
+        275.905,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "oil_pan",
+      "label": "oil_pan",
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#73757a"
+    },
+    {
+      "part": "piston",
+      "label": "piston_1",
+      "pos": [
+        -126.1,
+        134.7297,
+        134.7297
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#d1d4d9"
+    },
+    {
+      "part": "piston_pin",
+      "label": "piston_pin_1",
+      "pos": [
+        -126.1,
+        134.7297,
+        134.7297
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "piston_bushing",
+      "label": "piston_bushing_1",
+      "pos": [
+        -138.165,
+        134.7297,
+        134.7297
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_upper",
+      "label": "rod_upper_1",
+      "pos": [
+        -138.165,
+        0.0,
+        63.5
+      ],
+      "rot_deg": [
+        -62.1352,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_lower",
+      "label": "rod_lower_1",
+      "pos": [
+        -138.165,
+        0.0,
+        63.5
+      ],
+      "rot_deg": [
+        -62.1352,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "piston",
+      "label": "piston_2",
+      "pos": [
+        19.95,
+        63.7633,
+        63.7633
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#d1d4d9"
+    },
+    {
+      "part": "piston_pin",
+      "label": "piston_pin_2",
+      "pos": [
+        19.95,
+        63.7633,
+        63.7633
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "piston_bushing",
+      "label": "piston_bushing_2",
+      "pos": [
+        7.885,
+        63.7633,
+        63.7633
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_upper",
+      "label": "rod_upper_2",
+      "pos": [
+        7.885,
+        -54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        -51.1909,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_lower",
+      "label": "rod_lower_2",
+      "pos": [
+        7.885,
+        -54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        -51.1909,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "piston",
+      "label": "piston_3",
+      "pos": [
+        166.0,
+        110.2712,
+        110.2712
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#d1d4d9"
+    },
+    {
+      "part": "piston_pin",
+      "label": "piston_pin_3",
+      "pos": [
+        166.0,
+        110.2712,
+        110.2712
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "piston_bushing",
+      "label": "piston_bushing_3",
+      "pos": [
+        153.935,
+        110.2712,
+        110.2712
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_upper",
+      "label": "rod_upper_3",
+      "pos": [
+        153.935,
+        54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        -21.2674,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_lower",
+      "label": "rod_lower_3",
+      "pos": [
+        153.935,
+        54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        -21.2674,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "piston",
+      "label": "piston_4",
+      "pos": [
+        -126.1,
+        -134.7297,
+        134.7297
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#d1d4d9"
+    },
+    {
+      "part": "piston_pin",
+      "label": "piston_pin_4",
+      "pos": [
+        -126.1,
+        -134.7297,
+        134.7297
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "piston_bushing",
+      "label": "piston_bushing_4",
+      "pos": [
+        -114.035,
+        -134.7297,
+        134.7297
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_upper",
+      "label": "rod_upper_4",
+      "pos": [
+        -114.035,
+        0.0,
+        63.5
+      ],
+      "rot_deg": [
+        62.1352,
+        -0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_lower",
+      "label": "rod_lower_4",
+      "pos": [
+        -114.035,
+        0.0,
+        63.5
+      ],
+      "rot_deg": [
+        62.1352,
+        -0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "piston",
+      "label": "piston_5",
+      "pos": [
+        19.95,
+        -110.2712,
+        110.2712
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#d1d4d9"
+    },
+    {
+      "part": "piston_pin",
+      "label": "piston_pin_5",
+      "pos": [
+        19.95,
+        -110.2712,
+        110.2712
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "piston_bushing",
+      "label": "piston_bushing_5",
+      "pos": [
+        32.015,
+        -110.2712,
+        110.2712
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_upper",
+      "label": "rod_upper_5",
+      "pos": [
+        32.015,
+        -54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        21.2674,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_lower",
+      "label": "rod_lower_5",
+      "pos": [
+        32.015,
+        -54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        21.2674,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "piston",
+      "label": "piston_6",
+      "pos": [
+        166.0,
+        -63.7633,
+        63.7633
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#d1d4d9"
+    },
+    {
+      "part": "piston_pin",
+      "label": "piston_pin_6",
+      "pos": [
+        166.0,
+        -63.7633,
+        63.7633
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "piston_bushing",
+      "label": "piston_bushing_6",
+      "pos": [
+        178.065,
+        -63.7633,
+        63.7633
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_upper",
+      "label": "rod_upper_6",
+      "pos": [
+        178.065,
+        54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        51.1909,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "articulated_rod_lower",
+      "label": "rod_lower_6",
+      "pos": [
+        178.065,
+        54.9926,
+        -31.75
+      ],
+      "rot_deg": [
+        51.1909,
+        0.0,
+        -90.0
+      ],
+      "color": "#b88c4c"
+    },
+    {
+      "part": "cylinder_head",
+      "label": "cylinder_head_R",
+      "pos": [
+        19.95,
+        200.9385,
+        200.9385
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#bfc2c7"
+    },
+    {
+      "part": "cam_shaft",
+      "label": "cam_shaft_R",
+      "pos": [
+        19.95,
+        295.5848,
+        227.5611
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "cam_shaft_bushing",
+      "label": "cam_bushing_R_front",
+      "pos": [
+        239.025,
+        295.5848,
+        227.5611
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "cam_shaft_bushing",
+      "label": "cam_bushing_R_rear",
+      "pos": [
+        -199.125,
+        295.5848,
+        227.5611
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_R_1",
+      "pos": [
+        166.0,
+        226.9813,
+        183.876
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_R_1",
+      "pos": [
+        166.0,
+        267.3924,
+        224.2872
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_R_1",
+      "pos": [
+        178.0,
+        287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_R_1",
+      "pos": [
+        178.0,
+        309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_R_1",
+      "pos": [
+        178.0,
+        309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_R_1",
+      "pos": [
+        178.0,
+        265.5893,
+        269.4218
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_R_1",
+      "pos": [
+        178.0,
+        287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_R_2",
+      "pos": [
+        166.0,
+        183.876,
+        226.9813
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_R_2",
+      "pos": [
+        166.0,
+        224.2872,
+        267.3924
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_R_2",
+      "pos": [
+        154.0,
+        269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_R_2",
+      "pos": [
+        154.0,
+        291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_R_2",
+      "pos": [
+        154.0,
+        291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_R_2",
+      "pos": [
+        154.0,
+        247.749,
+        287.2621
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_R_2",
+      "pos": [
+        154.0,
+        269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_R_3",
+      "pos": [
+        19.95,
+        226.9813,
+        183.876
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_R_3",
+      "pos": [
+        19.95,
+        267.3924,
+        224.2872
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_R_3",
+      "pos": [
+        31.95,
+        287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_R_3",
+      "pos": [
+        31.95,
+        309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_R_3",
+      "pos": [
+        31.95,
+        309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_R_3",
+      "pos": [
+        31.95,
+        265.5893,
+        269.4218
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_R_3",
+      "pos": [
+        31.95,
+        287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_R_4",
+      "pos": [
+        19.95,
+        183.876,
+        226.9813
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_R_4",
+      "pos": [
+        19.95,
+        224.2872,
+        267.3924
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_R_4",
+      "pos": [
+        7.95,
+        269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_R_4",
+      "pos": [
+        7.95,
+        291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_R_4",
+      "pos": [
+        7.95,
+        291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_R_4",
+      "pos": [
+        7.95,
+        247.749,
+        287.2621
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_R_4",
+      "pos": [
+        7.95,
+        269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_R_5",
+      "pos": [
+        -126.1,
+        226.9813,
+        183.876
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_R_5",
+      "pos": [
+        -126.1,
+        267.3924,
+        224.2872
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_R_5",
+      "pos": [
+        -114.1,
+        287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_R_5",
+      "pos": [
+        -114.1,
+        309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_R_5",
+      "pos": [
+        -114.1,
+        309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_R_5",
+      "pos": [
+        -114.1,
+        265.5893,
+        269.4218
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_R_5",
+      "pos": [
+        -114.1,
+        287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_R_6",
+      "pos": [
+        -126.1,
+        183.876,
+        226.9813
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_R_6",
+      "pos": [
+        -126.1,
+        224.2872,
+        267.3924
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_R_6",
+      "pos": [
+        -138.1,
+        269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_R_6",
+      "pos": [
+        -138.1,
+        291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_R_6",
+      "pos": [
+        -138.1,
+        291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_R_6",
+      "pos": [
+        -138.1,
+        247.749,
+        287.2621
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_R_6",
+      "pos": [
+        -138.1,
+        269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        -90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "cylinder_head",
+      "label": "cylinder_head_L",
+      "pos": [
+        19.95,
+        -200.9385,
+        200.9385
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#bfc2c7"
+    },
+    {
+      "part": "cam_shaft",
+      "label": "cam_shaft_L",
+      "pos": [
+        19.95,
+        -295.5848,
+        227.5611
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "cam_shaft_bushing",
+      "label": "cam_bushing_L_front",
+      "pos": [
+        -199.125,
+        -295.5848,
+        227.5611
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "cam_shaft_bushing",
+      "label": "cam_bushing_L_rear",
+      "pos": [
+        239.025,
+        -295.5848,
+        227.5611
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_L_1",
+      "pos": [
+        -126.1,
+        -226.9813,
+        183.876
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_L_1",
+      "pos": [
+        -126.1,
+        -267.3924,
+        224.2872
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_L_1",
+      "pos": [
+        -138.1,
+        -287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_L_1",
+      "pos": [
+        -138.1,
+        -309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_L_1",
+      "pos": [
+        -138.1,
+        -309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_L_1",
+      "pos": [
+        -138.1,
+        -265.5893,
+        269.4218
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_L_1",
+      "pos": [
+        -138.1,
+        -287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_L_2",
+      "pos": [
+        -126.1,
+        -183.876,
+        226.9813
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_L_2",
+      "pos": [
+        -126.1,
+        -224.2872,
+        267.3924
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_L_2",
+      "pos": [
+        -114.1,
+        -269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_L_2",
+      "pos": [
+        -114.1,
+        -291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_L_2",
+      "pos": [
+        -114.1,
+        -291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_L_2",
+      "pos": [
+        -114.1,
+        -247.749,
+        287.2621
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_L_2",
+      "pos": [
+        -114.1,
+        -269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_L_3",
+      "pos": [
+        19.95,
+        -226.9813,
+        183.876
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_L_3",
+      "pos": [
+        19.95,
+        -267.3924,
+        224.2872
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_L_3",
+      "pos": [
+        7.95,
+        -287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_L_3",
+      "pos": [
+        7.95,
+        -309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_L_3",
+      "pos": [
+        7.95,
+        -309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_L_3",
+      "pos": [
+        7.95,
+        -265.5893,
+        269.4218
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_L_3",
+      "pos": [
+        7.95,
+        -287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_L_4",
+      "pos": [
+        19.95,
+        -183.876,
+        226.9813
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_L_4",
+      "pos": [
+        19.95,
+        -224.2872,
+        267.3924
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_L_4",
+      "pos": [
+        31.95,
+        -269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_L_4",
+      "pos": [
+        31.95,
+        -291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_L_4",
+      "pos": [
+        31.95,
+        -291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_L_4",
+      "pos": [
+        31.95,
+        -247.749,
+        287.2621
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_L_4",
+      "pos": [
+        31.95,
+        -269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_L_5",
+      "pos": [
+        166.0,
+        -226.9813,
+        183.876
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_L_5",
+      "pos": [
+        166.0,
+        -267.3924,
+        224.2872
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_L_5",
+      "pos": [
+        154.0,
+        -287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_L_5",
+      "pos": [
+        154.0,
+        -309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_L_5",
+      "pos": [
+        154.0,
+        -309.5572,
+        241.5335
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_L_5",
+      "pos": [
+        154.0,
+        -265.5893,
+        269.4218
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_L_5",
+      "pos": [
+        154.0,
+        -287.8207,
+        251.235
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "engine_valve",
+      "label": "valve_L_6",
+      "pos": [
+        166.0,
+        -183.876,
+        226.9813
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_spring",
+      "label": "spring_L_6",
+      "pos": [
+        166.0,
+        -224.2872,
+        267.3924
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm",
+      "label": "rocker_arm_L_6",
+      "pos": [
+        178.0,
+        -269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_roller",
+      "label": "rocker_roller_L_6",
+      "pos": [
+        178.0,
+        -291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin_two",
+      "label": "rocker_axle_L_6",
+      "pos": [
+        178.0,
+        -291.7169,
+        259.3738
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_pin",
+      "label": "rocker_pin_L_6",
+      "pos": [
+        178.0,
+        -247.749,
+        287.2621
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "rocker_arm_bolt",
+      "label": "rocker_bolt_L_6",
+      "pos": [
+        178.0,
+        -269.9804,
+        269.0753
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        90.0
+      ],
+      "color": "#8c9199"
+    },
+    {
+      "part": "valves_cover",
+      "label": "valves_cover_R",
+      "pos": [
+        34.24,
+        245.8398,
+        245.8398
+      ],
+      "rot_deg": [
+        -45.0,
+        0.0,
+        180.0
+      ],
+      "color": "#3359bf"
+    },
+    {
+      "part": "valves_cover",
+      "label": "valves_cover_L",
+      "pos": [
+        5.66,
+        -245.8398,
+        245.8398
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#3359bf"
+    },
+    {
+      "part": "intake_manifold",
+      "label": "intake_manifold",
+      "pos": [
+        19.95,
+        0.0,
+        258.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#b2b5ba"
+    },
+    {
+      "part": "exhaust_manifold",
+      "label": "exhaust_manifold_R",
+      "pos": [
+        19.95,
+        291.8654,
+        154.913
+      ],
+      "rot_deg": [
+        135.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#404045"
+    },
+    {
+      "part": "exhaust_manifold",
+      "label": "exhaust_manifold_L",
+      "pos": [
+        19.95,
+        -291.8654,
+        154.913
+      ],
+      "rot_deg": [
+        45.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#404045"
+    },
+    {
+      "part": "front_cover",
+      "label": "front_cover",
+      "pos": [
+        -221.35,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#a6a8ad"
+    },
+    {
+      "part": "belt_wheel_two",
+      "label": "belt_wheel_two",
+      "pos": [
+        -285.0,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#d9b21f"
+    },
+    {
+      "part": "belt_wheel_one",
+      "label": "belt_wheel_one_R",
+      "pos": [
+        -286.0,
+        130.0,
+        190.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#d9b21f"
+    },
+    {
+      "part": "belt_wheel_one",
+      "label": "belt_wheel_one_L",
+      "pos": [
+        -286.0,
+        -130.0,
+        190.0
+      ],
+      "rot_deg": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "color": "#d9b21f"
+    },
+    {
+      "part": "air_turbo",
+      "label": "air_turbo_R",
+      "pos": [
+        -350.0,
+        170.0,
+        158.0
+      ],
+      "rot_deg": [
+        -0.0,
+        45.0,
+        90.0
+      ],
+      "color": "#999ca1"
+    },
+    {
+      "part": "air_filter",
+      "label": "air_filter_R",
+      "pos": [
+        -376.8701,
+        170.0,
+        184.8701
+      ],
+      "rot_deg": [
+        0.0,
+        -45.0,
+        0.0
+      ],
+      "color": "#e6bf26"
+    },
+    {
+      "part": "air_turbo",
+      "label": "air_turbo_L",
+      "pos": [
+        -350.0,
+        -170.0,
+        158.0
+      ],
+      "rot_deg": [
+        -0.0,
+        45.0,
+        90.0
+      ],
+      "color": "#999ca1"
+    },
+    {
+      "part": "air_filter",
+      "label": "air_filter_L",
+      "pos": [
+        -376.8701,
+        -170.0,
+        184.8701
+      ],
+      "rot_deg": [
+        0.0,
+        -45.0,
+        0.0
+      ],
+      "color": "#e6bf26"
+    }
+  ],
+  "build": [
+    {
+      "id": "engine_block",
+      "title": "Engine Block",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "Extrude 1 (base V section)",
+          "operation": "extrude",
+          "params": {
+            "length": 442.7,
+            "height": 255.94,
+            "half_width": 262.683329573899
+          },
+          "glb": "build_steps/engine_block_s01_Extrude 1 (base V section).glb",
+          "step_file": "build_steps/engine_block_s01_Extrude 1 (base V section).step"
+        },
+        {
+          "step": 2,
+          "feature": "Crank trough (Sketch 1 R63.50)",
+          "operation": "cut",
+          "params": {
+            "radius": 63.5
+          },
+          "glb": "build_steps/engine_block_s02_Crank trough (Sketch 1 R63.50).glb",
+          "step_file": "build_steps/engine_block_s02_Crank trough (Sketch 1 R63.50).step"
+        },
+        {
+          "step": 3,
+          "feature": "Extrude 2 (bank-1 bores)",
+          "operation": "cut",
+          "params": {
+            "bore_dia": 127.0,
+            "pitch": 146.05,
+            "depth": 273.05,
+            "x": [
+              -126.1,
+              19.950000000000017,
+              166.00000000000003
+            ]
+          },
+          "glb": "build_steps/engine_block_s03_Extrude 2 (bank-1 bores).glb",
+          "step_file": "build_steps/engine_block_s03_Extrude 2 (bank-1 bores).step"
+        },
+        {
+          "step": 4,
+          "feature": "Move 1 / mirror bank (bank-2 bores)",
+          "operation": "cut",
+          "params": {
+            "bore_dia": 127.0,
+            "pitch": 146.05,
+            "depth": 273.05,
+            "x": [
+              -126.1,
+              19.950000000000017,
+              166.00000000000003
+            ]
+          },
+          "glb": "build_steps/engine_block_s04_Move 1 - mirror bank (bank-2 bores).glb",
+          "step_file": "build_steps/engine_block_s04_Move 1 - mirror bank (bank-2 bores).step"
+        },
+        {
+          "step": 5,
+          "feature": "Rounds (25.40)",
+          "operation": "fillet",
+          "params": {
+            "radius": 25.4
+          },
+          "glb": "build_steps/engine_block_s05_Rounds (25.40).glb",
+          "step_file": "build_steps/engine_block_s05_Rounds (25.40).step"
+        }
+      ]
+    },
+    {
+      "id": "crank_shaft",
+      "title": "Crank Shaft",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "Extrude 1 \u2014 first main journal",
+          "operation": "extrude",
+          "params": {
+            "dia": 88.9,
+            "depth": 53.34
+          },
+          "glb": "build_steps/crank_shaft_s01_Extrude 1 - first main journal.glb",
+          "step_file": "build_steps/crank_shaft_s01_Extrude 1 - first main journal.step"
+        },
+        {
+          "step": 2,
+          "feature": "Extrude 2-5 + Mirror 1 \u2014 first throw (web|pin|web)",
+          "operation": "extrude+mirror",
+          "params": {
+            "web_lobe_dia": 101.6,
+            "pin_dia": 76.2,
+            "throw": 63.5,
+            "web_thick": 25.4
+          },
+          "glb": "build_steps/crank_shaft_s02_Extrude 2-5 - Mirror 1 - first throw (web-pin-web).glb",
+          "step_file": "build_steps/crank_shaft_s02_Extrude 2-5 - Mirror 1 - first throw (web-pin-web).step"
+        },
+        {
+          "step": 3,
+          "feature": "Pattern 1 of LOCAL_GROUP \u2014 3 throws at pitch 146.05",
+          "operation": "pattern",
+          "params": {
+            "members": 3,
+            "spacing": 146.05
+          },
+          "glb": "build_steps/crank_shaft_s03_Pattern 1 of LOCAL_GROUP - 3 throws at pitch 146.05.glb",
+          "step_file": "build_steps/crank_shaft_s03_Pattern 1 of LOCAL_GROUP - 3 throws at pitch 146.05.step"
+        },
+        {
+          "step": 4,
+          "feature": "Extrude 24/25 \u2014 nose and rear stub",
+          "operation": "extrude",
+          "params": {
+            "nose_dia": 88.9,
+            "nose_len": 53.34,
+            "stub_dia": 76.2,
+            "stub_len": 53.34
+          },
+          "glb": "build_steps/crank_shaft_s04_Extrude 24-25 - nose and rear stub.glb",
+          "step_file": "build_steps/crank_shaft_s04_Extrude 24-25 - nose and rear stub.step"
+        },
+        {
+          "step": 5,
+          "feature": "Move 1 \u2014 throw 2 rotated Rz=120\u00b0",
+          "operation": "move(rotate)",
+          "params": {
+            "rz_deg": 120.0
+          },
+          "glb": "build_steps/crank_shaft_s05_Move 1 - throw 2 rotated Rz-120-.glb",
+          "step_file": "build_steps/crank_shaft_s05_Move 1 - throw 2 rotated Rz-120-.step"
+        },
+        {
+          "step": 6,
+          "feature": "Move 2 \u2014 throw 3 rotated Rz=240\u00b0 (final)",
+          "operation": "move(rotate)",
+          "params": {
+            "rz_deg": 240.0
+          },
+          "glb": "build_steps/crank_shaft_s06_Move 2 - throw 3 rotated Rz-240- (final).glb",
+          "step_file": "build_steps/crank_shaft_s06_Move 2 - throw 3 rotated Rz-240- (final).step"
+        }
+      ]
+    },
+    {
+      "id": "piston",
+      "title": "Piston",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "crown_and_skirt",
+          "operation": "revolve",
+          "params": {
+            "od": 126.0,
+            "height": 81.28,
+            "dome_rise": 5.0,
+            "wall": 6.35,
+            "crown_t": 24.0
+          },
+          "glb": "build_steps/piston_s01_crown_and_skirt.glb",
+          "step_file": "build_steps/piston_s01_crown_and_skirt.step"
+        },
+        {
+          "step": 2,
+          "feature": "ring_grooves",
+          "operation": "revolve_cut",
+          "params": {
+            "count": 3,
+            "width": 3.81,
+            "depth": 5.18,
+            "top_land": 6.35,
+            "land": 2.54
+          },
+          "glb": "build_steps/piston_s02_ring_grooves.glb",
+          "step_file": "build_steps/piston_s02_ring_grooves.step"
+        },
+        {
+          "step": 3,
+          "feature": "pin_boss_and_bore",
+          "operation": "extrude+extrude_cut",
+          "params": {
+            "bore_d": 25.4,
+            "boss_w": 50.8,
+            "boss_span": 63.5
+          },
+          "glb": "build_steps/piston_s03_pin_boss_and_bore.glb",
+          "step_file": "build_steps/piston_s03_pin_boss_and_bore.step"
+        },
+        {
+          "step": 4,
+          "feature": "skirt_cut",
+          "operation": "extrude_cut",
+          "params": {
+            "width": 76.2,
+            "height": 43.18,
+            "corner_r": 10.0
+          },
+          "glb": "build_steps/piston_s04_skirt_cut.glb",
+          "step_file": "build_steps/piston_s04_skirt_cut.step"
+        }
+      ]
+    },
+    {
+      "id": "articulated_rod_upper",
+      "title": "Articulated Rod Upper",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "01_base_extrude",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_upper_s01_01_base_extrude.glb",
+          "step_file": "build_steps/articulated_rod_upper_s01_01_base_extrude.step"
+        },
+        {
+          "step": 2,
+          "feature": "02_small_boss",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_upper_s02_02_small_boss.glb",
+          "step_file": "build_steps/articulated_rod_upper_s02_02_small_boss.step"
+        },
+        {
+          "step": 3,
+          "feature": "03_shank_pockets",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_upper_s03_03_shank_pockets.glb",
+          "step_file": "build_steps/articulated_rod_upper_s03_03_shank_pockets.step"
+        },
+        {
+          "step": 4,
+          "feature": "04_lug_bosses",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_upper_s04_04_lug_bosses.glb",
+          "step_file": "build_steps/articulated_rod_upper_s04_04_lug_bosses.step"
+        },
+        {
+          "step": 5,
+          "feature": "05_final",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_upper_s05_05_final.glb",
+          "step_file": "build_steps/articulated_rod_upper_s05_05_final.step"
+        }
+      ]
+    },
+    {
+      "id": "articulated_rod_lower",
+      "title": "Articulated Rod Lower",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "01_half_shell",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_lower_s01_01_half_shell.glb",
+          "step_file": "build_steps/articulated_rod_lower_s01_01_half_shell.step"
+        },
+        {
+          "step": 2,
+          "feature": "02_lug_bosses",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_lower_s02_02_lug_bosses.glb",
+          "step_file": "build_steps/articulated_rod_lower_s02_02_lug_bosses.step"
+        },
+        {
+          "step": 3,
+          "feature": "03_final",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/articulated_rod_lower_s03_03_final.glb",
+          "step_file": "build_steps/articulated_rod_lower_s03_03_final.step"
+        }
+      ]
+    },
+    {
+      "id": "cylinder_head",
+      "title": "Cylinder Head",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "extrude1_base",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cylinder_head_s01_extrude1_base.glb",
+          "step_file": "build_steps/cylinder_head_s01_extrude1_base.step"
+        },
+        {
+          "step": 2,
+          "feature": "chambers_pockets",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cylinder_head_s02_chambers_pockets.glb",
+          "step_file": "build_steps/cylinder_head_s02_chambers_pockets.step"
+        },
+        {
+          "step": 3,
+          "feature": "cam_towers",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cylinder_head_s03_cam_towers.glb",
+          "step_file": "build_steps/cylinder_head_s03_cam_towers.step"
+        },
+        {
+          "step": 4,
+          "feature": "valve_guide_bosses",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cylinder_head_s04_valve_guide_bosses.glb",
+          "step_file": "build_steps/cylinder_head_s04_valve_guide_bosses.step"
+        },
+        {
+          "step": 5,
+          "feature": "port_bosses",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cylinder_head_s05_port_bosses.glb",
+          "step_file": "build_steps/cylinder_head_s05_port_bosses.step"
+        },
+        {
+          "step": 6,
+          "feature": "studs_and_rounds",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cylinder_head_s06_studs_and_rounds.glb",
+          "step_file": "build_steps/cylinder_head_s06_studs_and_rounds.step"
+        }
+      ]
+    },
+    {
+      "id": "cam_shaft",
+      "title": "Cam Shaft",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "step 1",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cam_shaft_s01_step 1.glb",
+          "step_file": "build_steps/cam_shaft_s01_step 1.step"
+        },
+        {
+          "step": 2,
+          "feature": "step 2",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cam_shaft_s02_step 2.glb",
+          "step_file": "build_steps/cam_shaft_s02_step 2.step"
+        },
+        {
+          "step": 3,
+          "feature": "step 3",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cam_shaft_s03_step 3.glb",
+          "step_file": "build_steps/cam_shaft_s03_step 3.step"
+        },
+        {
+          "step": 4,
+          "feature": "step 4",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/cam_shaft_s04_step 4.glb",
+          "step_file": "build_steps/cam_shaft_s04_step 4.step"
+        }
+      ]
+    },
+    {
+      "id": "engine_valve",
+      "title": "Engine Valve",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "01_revolve",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/engine_valve_s01_01_revolve.glb",
+          "step_file": "build_steps/engine_valve_s01_01_revolve.step"
+        },
+        {
+          "step": 2,
+          "feature": "02_final",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/engine_valve_s02_02_final.glb",
+          "step_file": "build_steps/engine_valve_s02_02_final.step"
+        }
+      ]
+    },
+    {
+      "id": "rocker_spring",
+      "title": "Rocker Spring",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "01_helical_sweep",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/rocker_spring_s01_01_helical_sweep.glb",
+          "step_file": "build_steps/rocker_spring_s01_01_helical_sweep.step"
+        },
+        {
+          "step": 2,
+          "feature": "02_ground_ends",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/rocker_spring_s02_02_ground_ends.glb",
+          "step_file": "build_steps/rocker_spring_s02_02_ground_ends.step"
+        }
+      ]
+    },
+    {
+      "id": "rocker_arm",
+      "title": "Rocker Arm",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "01_extrude_profile",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/rocker_arm_s01_01_extrude_profile.glb",
+          "step_file": "build_steps/rocker_arm_s01_01_extrude_profile.step"
+        },
+        {
+          "step": 2,
+          "feature": "02_end_slots",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/rocker_arm_s02_02_end_slots.glb",
+          "step_file": "build_steps/rocker_arm_s02_02_end_slots.step"
+        },
+        {
+          "step": 3,
+          "feature": "03_final_chamfer",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/rocker_arm_s03_03_final_chamfer.glb",
+          "step_file": "build_steps/rocker_arm_s03_03_final_chamfer.step"
+        }
+      ]
+    },
+    {
+      "id": "oil_pan",
+      "title": "Oil Pan",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "01_flange_plate",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/oil_pan_s01_01_flange_plate.glb",
+          "step_file": "build_steps/oil_pan_s01_01_flange_plate.step"
+        },
+        {
+          "step": 2,
+          "feature": "02_sump_tub",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/oil_pan_s02_02_sump_tub.glb",
+          "step_file": "build_steps/oil_pan_s02_02_sump_tub.step"
+        },
+        {
+          "step": 3,
+          "feature": "03_crank_arch",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/oil_pan_s03_03_crank_arch.glb",
+          "step_file": "build_steps/oil_pan_s03_03_crank_arch.step"
+        },
+        {
+          "step": 4,
+          "feature": "04_bolt_bosses",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/oil_pan_s04_04_bolt_bosses.glb",
+          "step_file": "build_steps/oil_pan_s04_04_bolt_bosses.step"
+        },
+        {
+          "step": 5,
+          "feature": "05_final",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/oil_pan_s05_05_final.glb",
+          "step_file": "build_steps/oil_pan_s05_05_final.step"
+        }
+      ]
+    },
+    {
+      "id": "valves_cover",
+      "title": "Valves Cover",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "01_base_block",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/valves_cover_s01_01_base_block.glb",
+          "step_file": "build_steps/valves_cover_s01_01_base_block.step"
+        },
+        {
+          "step": 2,
+          "feature": "02_arch_tunnels",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/valves_cover_s02_02_arch_tunnels.glb",
+          "step_file": "build_steps/valves_cover_s02_02_arch_tunnels.step"
+        },
+        {
+          "step": 3,
+          "feature": "03_corner_holes_pockets",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/valves_cover_s03_03_corner_holes_pockets.glb",
+          "step_file": "build_steps/valves_cover_s03_03_corner_holes_pockets.step"
+        },
+        {
+          "step": 4,
+          "feature": "04_cam_bore",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/valves_cover_s04_04_cam_bore.glb",
+          "step_file": "build_steps/valves_cover_s04_04_cam_bore.step"
+        },
+        {
+          "step": 5,
+          "feature": "05_final_rounds",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/valves_cover_s05_05_final_rounds.glb",
+          "step_file": "build_steps/valves_cover_s05_05_final_rounds.step"
+        }
+      ]
+    },
+    {
+      "id": "front_cover",
+      "title": "Front Cover",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "extrude1_plate",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/front_cover_s01_extrude1_plate.glb",
+          "step_file": "build_steps/front_cover_s01_extrude1_plate.step"
+        },
+        {
+          "step": 2,
+          "feature": "extrude2_step",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/front_cover_s02_extrude2_step.glb",
+          "step_file": "build_steps/front_cover_s02_extrude2_step.step"
+        },
+        {
+          "step": 3,
+          "feature": "shell1",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/front_cover_s03_shell1.glb",
+          "step_file": "build_steps/front_cover_s03_shell1.step"
+        },
+        {
+          "step": 4,
+          "feature": "bosses_and_holes",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/front_cover_s04_bosses_and_holes.glb",
+          "step_file": "build_steps/front_cover_s04_bosses_and_holes.step"
+        },
+        {
+          "step": 5,
+          "feature": "final_rounds",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/front_cover_s05_final_rounds.glb",
+          "step_file": "build_steps/front_cover_s05_final_rounds.step"
+        }
+      ]
+    },
+    {
+      "id": "intake_manifold",
+      "title": "Intake Manifold",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "extrude1_round1_plenum_log",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/intake_manifold_s01_extrude1_round1_plenum_log.glb",
+          "step_file": "build_steps/intake_manifold_s01_extrude1_round1_plenum_log.step"
+        },
+        {
+          "step": 2,
+          "feature": "extrude2_throttle_snout",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/intake_manifold_s02_extrude2_throttle_snout.glb",
+          "step_file": "build_steps/intake_manifold_s02_extrude2_throttle_snout.step"
+        },
+        {
+          "step": 3,
+          "feature": "blend1-3_extrude3_right_bank",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/intake_manifold_s03_blend1-3_extrude3_right_bank.glb",
+          "step_file": "build_steps/intake_manifold_s03_blend1-3_extrude3_right_bank.step"
+        },
+        {
+          "step": 4,
+          "feature": "mirror_blend4-6_left_bank",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/intake_manifold_s04_mirror_blend4-6_left_bank.glb",
+          "step_file": "build_steps/intake_manifold_s04_mirror_blend4-6_left_bank.step"
+        },
+        {
+          "step": 5,
+          "feature": "text_engrave_final",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/intake_manifold_s05_text_engrave_final.glb",
+          "step_file": "build_steps/intake_manifold_s05_text_engrave_final.step"
+        }
+      ]
+    },
+    {
+      "id": "exhaust_manifold",
+      "title": "Exhaust Manifold",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "Sketch 1/10 + Extrude 1 \u2014 scalloped flange plate 387.35 x 63.50 x 12.7, ports at pitch 146.05",
+          "operation": "extrude",
+          "params": {
+            "plate": [
+              387.35,
+              63.5,
+              12.7
+            ],
+            "port_pitch": 146.05
+          },
+          "glb": "build_steps/exhaust_manifold_s01_Sketch 1-10 - Extrude 1 - scalloped flange plate 387.35 x 63.50 x 12.7- ports at pitch 146.05.glb",
+          "step_file": "build_steps/exhaust_manifold_s01_Sketch 1-10 - Extrude 1 - scalloped flange plate 387.35 x 63.50 x 12.7- ports at pitch 146.05.step"
+        },
+        {
+          "step": 2,
+          "feature": "Swept Blend 1 \u2014 far-port elbow (R=drop 73.92) into full-length collector O50.80 (outlet -X) + Extrude 2 outlet",
+          "operation": "swept_blend",
+          "params": {
+            "bend_r": 73.92000000000002,
+            "collector_dia": 50.8,
+            "collector_drop": 73.92000000000002
+          },
+          "glb": "build_steps/exhaust_manifold_s02_Swept Blend 1 - far-port elbow (R-drop 73.92) into full-length collector O50.80 (outlet -X) - Extrude 2 outlet.glb",
+          "step_file": "build_steps/exhaust_manifold_s02_Swept Blend 1 - far-port elbow (R-drop 73.92) into full-length collector O50.80 (outlet -X) - Extrude 2 outlet.step"
+        },
+        {
+          "step": 3,
+          "feature": "Swept Blend 2 \u2014 middle-port runner O38.10 into collector",
+          "operation": "swept_blend",
+          "params": {
+            "runner_dia": 38.1,
+            "bend_r": 45.0
+          },
+          "glb": "build_steps/exhaust_manifold_s03_Swept Blend 2 - middle-port runner O38.10 into collector.glb",
+          "step_file": "build_steps/exhaust_manifold_s03_Swept Blend 2 - middle-port runner O38.10 into collector.step"
+        },
+        {
+          "step": 4,
+          "feature": "Swept Blend 3 \u2014 near-port runner (final; Shell 1 and R6.00 rounds omitted \u2014 solid reconstruction)",
+          "operation": "swept_blend",
+          "params": {
+            "runner_dia": 38.1
+          },
+          "glb": "build_steps/exhaust_manifold_s04_Swept Blend 3 - near-port runner (final- Shell 1 and R6.00 rounds omitted - solid reconstruction).glb",
+          "step_file": "build_steps/exhaust_manifold_s04_Swept Blend 3 - near-port runner (final- Shell 1 and R6.00 rounds omitted - solid reconstruction).step"
+        }
+      ]
+    },
+    {
+      "id": "air_turbo",
+      "title": "Air Turbo",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "swept_blend_1_volute",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_turbo_s01_swept_blend_1_volute.glb",
+          "step_file": "build_steps/air_turbo_s01_swept_blend_1_volute.step"
+        },
+        {
+          "step": 2,
+          "feature": "blend_1_centre_dome",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_turbo_s02_blend_1_centre_dome.glb",
+          "step_file": "build_steps/air_turbo_s02_blend_1_centre_dome.step"
+        },
+        {
+          "step": 3,
+          "feature": "extrude_1_outlet_pipe",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_turbo_s03_extrude_1_outlet_pipe.glb",
+          "step_file": "build_steps/air_turbo_s03_extrude_1_outlet_pipe.step"
+        },
+        {
+          "step": 4,
+          "feature": "extrude_3_4_inlet_stub_rear_boss",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_turbo_s04_extrude_3_4_inlet_stub_rear_boss.glb",
+          "step_file": "build_steps/air_turbo_s04_extrude_3_4_inlet_stub_rear_boss.step"
+        },
+        {
+          "step": 5,
+          "feature": "shell_bores_open_stubs",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_turbo_s05_shell_bores_open_stubs.glb",
+          "step_file": "build_steps/air_turbo_s05_shell_bores_open_stubs.step"
+        }
+      ]
+    },
+    {
+      "id": "air_filter",
+      "title": "Air Filter",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "pattern_1_of_blend_1_pleats",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_filter_s01_pattern_1_of_blend_1_pleats.glb",
+          "step_file": "build_steps/air_filter_s01_pattern_1_of_blend_1_pleats.step"
+        },
+        {
+          "step": 2,
+          "feature": "shell_1_inner_cone",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_filter_s02_shell_1_inner_cone.glb",
+          "step_file": "build_steps/air_filter_s02_shell_1_inner_cone.step"
+        },
+        {
+          "step": 3,
+          "feature": "extrude_2_base_disc",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_filter_s03_extrude_2_base_disc.glb",
+          "step_file": "build_steps/air_filter_s03_extrude_2_base_disc.step"
+        },
+        {
+          "step": 4,
+          "feature": "extrude_1_top_cap",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_filter_s04_extrude_1_top_cap.glb",
+          "step_file": "build_steps/air_filter_s04_extrude_1_top_cap.step"
+        },
+        {
+          "step": 5,
+          "feature": "extrude_3_inlet_hole",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_filter_s05_extrude_3_inlet_hole.glb",
+          "step_file": "build_steps/air_filter_s05_extrude_3_inlet_hole.step"
+        },
+        {
+          "step": 6,
+          "feature": "round_1",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/air_filter_s06_round_1.glb",
+          "step_file": "build_steps/air_filter_s06_round_1.step"
+        }
+      ]
+    },
+    {
+      "id": "belt_wheel_one",
+      "title": "Belt Wheel One",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "revolve1_blank",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/belt_wheel_one_s01_revolve1_blank.glb",
+          "step_file": "build_steps/belt_wheel_one_s01_revolve1_blank.step"
+        },
+        {
+          "step": 2,
+          "feature": "pattern_teeth",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/belt_wheel_one_s02_pattern_teeth.glb",
+          "step_file": "build_steps/belt_wheel_one_s02_pattern_teeth.step"
+        },
+        {
+          "step": 3,
+          "feature": "final_bevels",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/belt_wheel_one_s03_final_bevels.glb",
+          "step_file": "build_steps/belt_wheel_one_s03_final_bevels.step"
+        }
+      ]
+    },
+    {
+      "id": "belt_wheel_two",
+      "title": "Belt Wheel Two",
+      "steps": [
+        {
+          "step": 1,
+          "feature": "revolve1_blank",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/belt_wheel_two_s01_revolve1_blank.glb",
+          "step_file": "build_steps/belt_wheel_two_s01_revolve1_blank.step"
+        },
+        {
+          "step": 2,
+          "feature": "pattern_teeth",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/belt_wheel_two_s02_pattern_teeth.glb",
+          "step_file": "build_steps/belt_wheel_two_s02_pattern_teeth.step"
+        },
+        {
+          "step": 3,
+          "feature": "final_bevels",
+          "operation": "feature",
+          "params": {},
+          "glb": "build_steps/belt_wheel_two_s03_final_bevels.glb",
+          "step_file": "build_steps/belt_wheel_two_s03_final_bevels.step"
+        }
+      ]
+    }
+  ],
+  "assembly_stages": [
+    {
+      "stage": 0,
+      "labels": [
+        "engine_block"
+      ],
+      "step_file": "asm/asm_00.step"
+    },
+    {
+      "stage": 1,
+      "labels": [
+        "crank_shaft_bushing_front",
+        "crank_shaft_bushing_rear"
+      ],
+      "step_file": "asm/asm_01.step"
+    },
+    {
+      "stage": 2,
+      "labels": [
+        "crank_shaft"
+      ],
+      "step_file": "asm/asm_02.step"
+    },
+    {
+      "stage": 3,
+      "labels": [
+        "piston_1",
+        "piston_pin_1",
+        "piston_bushing_1",
+        "rod_upper_1",
+        "rod_lower_1"
+      ],
+      "step_file": "asm/asm_03.step"
+    },
+    {
+      "stage": 4,
+      "labels": [
+        "piston_2",
+        "piston_pin_2",
+        "piston_bushing_2",
+        "rod_upper_2",
+        "rod_lower_2"
+      ],
+      "step_file": "asm/asm_04.step"
+    },
+    {
+      "stage": 5,
+      "labels": [
+        "piston_3",
+        "piston_pin_3",
+        "piston_bushing_3",
+        "rod_upper_3",
+        "rod_lower_3"
+      ],
+      "step_file": "asm/asm_05.step"
+    },
+    {
+      "stage": 6,
+      "labels": [
+        "piston_4",
+        "piston_pin_4",
+        "piston_bushing_4",
+        "rod_upper_4",
+        "rod_lower_4"
+      ],
+      "step_file": "asm/asm_06.step"
+    },
+    {
+      "stage": 7,
+      "labels": [
+        "piston_5",
+        "piston_pin_5",
+        "piston_bushing_5",
+        "rod_upper_5",
+        "rod_lower_5"
+      ],
+      "step_file": "asm/asm_07.step"
+    },
+    {
+      "stage": 8,
+      "labels": [
+        "piston_6",
+        "piston_pin_6",
+        "piston_bushing_6",
+        "rod_upper_6",
+        "rod_lower_6"
+      ],
+      "step_file": "asm/asm_08.step"
+    },
+    {
+      "stage": 9,
+      "labels": [
+        "oil_pan"
+      ],
+      "step_file": "asm/asm_09.step"
+    },
+    {
+      "stage": 10,
+      "labels": [
+        "belt_wheel_two"
+      ],
+      "step_file": "asm/asm_10.step"
+    },
+    {
+      "stage": 11,
+      "labels": [
+        "front_cover"
+      ],
+      "step_file": "asm/asm_11.step"
+    },
+    {
+      "stage": 12,
+      "labels": [
+        "air_turbo_R",
+        "air_turbo_L"
+      ],
+      "step_file": "asm/asm_12.step"
+    },
+    {
+      "stage": 13,
+      "labels": [
+        "air_filter_R",
+        "air_filter_L"
+      ],
+      "step_file": "asm/asm_13.step"
+    },
+    {
+      "stage": 14,
+      "labels": [
+        "cylinder_head_R",
+        "cam_shaft_R",
+        "cam_bushing_R_front",
+        "cam_bushing_R_rear",
+        "valve_R_1",
+        "valve_R_2",
+        "valve_R_3",
+        "valve_R_4",
+        "valve_R_5",
+        "valve_R_6",
+        "spring_R_1",
+        "spring_R_2",
+        "spring_R_3",
+        "spring_R_4",
+        "spring_R_5",
+        "spring_R_6",
+        "rocker_arm_R_1",
+        "rocker_arm_R_2",
+        "rocker_arm_R_3",
+        "rocker_arm_R_4",
+        "rocker_arm_R_5",
+        "rocker_arm_R_6",
+        "rocker_roller_R_1",
+        "rocker_roller_R_2",
+        "rocker_roller_R_3",
+        "rocker_roller_R_4",
+        "rocker_roller_R_5",
+        "rocker_roller_R_6",
+        "rocker_pin_R_1",
+        "rocker_pin_R_2",
+        "rocker_pin_R_3",
+        "rocker_pin_R_4",
+        "rocker_pin_R_5",
+        "rocker_pin_R_6",
+        "rocker_axle_R_1",
+        "rocker_axle_R_2",
+        "rocker_axle_R_3",
+        "rocker_axle_R_4",
+        "rocker_axle_R_5",
+        "rocker_axle_R_6",
+        "rocker_bolt_R_1",
+        "rocker_bolt_R_2",
+        "rocker_bolt_R_3",
+        "rocker_bolt_R_4",
+        "rocker_bolt_R_5",
+        "rocker_bolt_R_6"
+      ],
+      "step_file": "asm/asm_14.step"
+    },
+    {
+      "stage": 15,
+      "labels": [
+        "cylinder_head_L",
+        "cam_shaft_L",
+        "cam_bushing_L_front",
+        "cam_bushing_L_rear",
+        "valve_L_1",
+        "valve_L_2",
+        "valve_L_3",
+        "valve_L_4",
+        "valve_L_5",
+        "valve_L_6",
+        "spring_L_1",
+        "spring_L_2",
+        "spring_L_3",
+        "spring_L_4",
+        "spring_L_5",
+        "spring_L_6",
+        "rocker_arm_L_1",
+        "rocker_arm_L_2",
+        "rocker_arm_L_3",
+        "rocker_arm_L_4",
+        "rocker_arm_L_5",
+        "rocker_arm_L_6",
+        "rocker_roller_L_1",
+        "rocker_roller_L_2",
+        "rocker_roller_L_3",
+        "rocker_roller_L_4",
+        "rocker_roller_L_5",
+        "rocker_roller_L_6",
+        "rocker_pin_L_1",
+        "rocker_pin_L_2",
+        "rocker_pin_L_3",
+        "rocker_pin_L_4",
+        "rocker_pin_L_5",
+        "rocker_pin_L_6",
+        "rocker_axle_L_1",
+        "rocker_axle_L_2",
+        "rocker_axle_L_3",
+        "rocker_axle_L_4",
+        "rocker_axle_L_5",
+        "rocker_axle_L_6",
+        "rocker_bolt_L_1",
+        "rocker_bolt_L_2",
+        "rocker_bolt_L_3",
+        "rocker_bolt_L_4",
+        "rocker_bolt_L_5",
+        "rocker_bolt_L_6"
+      ],
+      "step_file": "asm/asm_15.step"
+    },
+    {
+      "stage": 16,
+      "labels": [
+        "exhaust_manifold_R",
+        "exhaust_manifold_L"
+      ],
+      "step_file": "asm/asm_16.step"
+    },
+    {
+      "stage": 17,
+      "labels": [
+        "intake_manifold"
+      ],
+      "step_file": "asm/asm_17.step"
+    },
+    {
+      "stage": 18,
+      "labels": [
+        "valves_cover_R",
+        "valves_cover_L"
+      ],
+      "step_file": "asm/asm_18.step"
+    },
+    {
+      "stage": 19,
+      "labels": [
+        "belt_wheel_one_R",
+        "belt_wheel_one_L"
+      ],
+      "step_file": "asm/asm_19.step"
+    }
+  ],
+  "motion": {
+    "type": "crank_slider",
+    "axis": "X",
+    "throw": 63.5,
+    "rod": 152.4,
+    "pin_bore_z": 0.0,
+    "crank": "crank_shaft",
+    "cylinders": [
+      {
+        "x": -126.1,
+        "base_angle_deg": 0,
+        "bank_deg": 45,
+        "rod": "rod_upper_1",
+        "cap": "rod_lower_1",
+        "pin": "piston_pin_1",
+        "piston": "piston_1",
+        "rings": [
+          "piston_bushing_1"
+        ]
+      },
+      {
+        "x": 19.95,
+        "base_angle_deg": 240,
+        "bank_deg": 45,
+        "rod": "rod_upper_2",
+        "cap": "rod_lower_2",
+        "pin": "piston_pin_2",
+        "piston": "piston_2",
+        "rings": [
+          "piston_bushing_2"
+        ]
+      },
+      {
+        "x": 166.0,
+        "base_angle_deg": 120,
+        "bank_deg": 45,
+        "rod": "rod_upper_3",
+        "cap": "rod_lower_3",
+        "pin": "piston_pin_3",
+        "piston": "piston_3",
+        "rings": [
+          "piston_bushing_3"
+        ]
+      },
+      {
+        "x": -126.1,
+        "base_angle_deg": 0,
+        "bank_deg": -45,
+        "rod": "rod_upper_4",
+        "cap": "rod_lower_4",
+        "pin": "piston_pin_4",
+        "piston": "piston_4",
+        "rings": [
+          "piston_bushing_4"
+        ]
+      },
+      {
+        "x": 19.95,
+        "base_angle_deg": 240,
+        "bank_deg": -45,
+        "rod": "rod_upper_5",
+        "cap": "rod_lower_5",
+        "pin": "piston_pin_5",
+        "piston": "piston_5",
+        "rings": [
+          "piston_bushing_5"
+        ]
+      },
+      {
+        "x": 166.0,
+        "base_angle_deg": 120,
+        "bank_deg": -45,
+        "rod": "rod_upper_6",
+        "cap": "rod_lower_6",
+        "pin": "piston_pin_6",
+        "piston": "piston_6",
+        "rings": [
+          "piston_bushing_6"
+        ]
+      }
+    ]
+  }
+}
