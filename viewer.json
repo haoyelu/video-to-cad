@@ -1,0 +1,682 @@
+{
+  "title": "Jet Engine (Creo tutorial reconstruction)",
+  "units": "mm",
+  "parts": [
+    {
+      "id": "nose_cone",
+      "glb": "parts/nose_cone.glb"
+    },
+    {
+      "id": "primary_turbine_bushing",
+      "glb": "parts/primary_turbine_bushing.glb"
+    },
+    {
+      "id": "bearing_one",
+      "glb": "parts/bearing_one.glb"
+    },
+    {
+      "id": "central_mounting_shaft",
+      "glb": "parts/central_mounting_shaft.glb"
+    },
+    {
+      "id": "rear_mounting_shaft",
+      "glb": "parts/rear_mounting_shaft.glb"
+    },
+    {
+      "id": "rear_case",
+      "glb": "parts/rear_case.glb"
+    },
+    {
+      "id": "end_cone",
+      "glb": "parts/end_cone.glb"
+    },
+    {
+      "id": "exhaust_case",
+      "glb": "parts/exhaust_case.glb"
+    },
+    {
+      "id": "primary_turbine",
+      "glb": "parts/primary_turbine.glb"
+    },
+    {
+      "id": "air_turbine_one",
+      "glb": "parts/air_turbine_one.glb"
+    },
+    {
+      "id": "air_turbine_two",
+      "glb": "parts/air_turbine_two.glb"
+    },
+    {
+      "id": "air_turbine_three",
+      "glb": "parts/air_turbine_three.glb"
+    },
+    {
+      "id": "air_turbine_four",
+      "glb": "parts/air_turbine_four.glb"
+    },
+    {
+      "id": "air_turbine_five",
+      "glb": "parts/air_turbine_five.glb"
+    },
+    {
+      "id": "petrol_turbine_one",
+      "glb": "parts/petrol_turbine_one.glb"
+    },
+    {
+      "id": "petrol_turbine_two",
+      "glb": "parts/petrol_turbine_two.glb"
+    },
+    {
+      "id": "petrol_turbine_three",
+      "glb": "parts/petrol_turbine_three.glb"
+    },
+    {
+      "id": "petrol_turbine_four",
+      "glb": "parts/petrol_turbine_four.glb"
+    },
+    {
+      "id": "petrol_turbine_five",
+      "glb": "parts/petrol_turbine_five.glb"
+    },
+    {
+      "id": "air_turbine_bracket",
+      "glb": "parts/air_turbine_bracket.glb"
+    },
+    {
+      "id": "petrol_intake_bracket",
+      "glb": "parts/petrol_intake_bracket.glb"
+    },
+    {
+      "id": "petrol_turbine_bracket",
+      "glb": "parts/petrol_turbine_bracket.glb"
+    },
+    {
+      "id": "primary_turbine_case",
+      "glb": "parts/primary_turbine_case.glb"
+    },
+    {
+      "id": "bearing_case",
+      "glb": "parts/bearing_case.glb"
+    },
+    {
+      "id": "air_turbine_case",
+      "glb": "parts/air_turbine_case.glb"
+    },
+    {
+      "id": "petrol_intake_case",
+      "glb": "parts/petrol_intake_case.glb"
+    },
+    {
+      "id": "petrol_turbine_case",
+      "glb": "parts/petrol_turbine_case.glb"
+    },
+    {
+      "id": "pipe_array",
+      "glb": "parts/pipe_array.glb"
+    },
+    {
+      "id": "front_rim",
+      "glb": "parts/front_rim.glb"
+    },
+    {
+      "id": "inner_body",
+      "glb": "parts/inner_body.glb"
+    },
+    {
+      "id": "outer_body",
+      "glb": "parts/outer_body.glb"
+    }
+  ],
+  "instances": [
+    {
+      "part": "central_mounting_shaft",
+      "label": "central_mounting_shaft",
+      "pos": [
+        0.0,
+        0.0,
+        30.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "nose_cone",
+      "label": "nose_cone",
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#26262b"
+    },
+    {
+      "part": "primary_turbine",
+      "label": "primary_turbine",
+      "pos": [
+        0.0,
+        0.0,
+        65.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "primary_turbine_bushing",
+      "label": "primary_turbine_bushing",
+      "pos": [
+        0.0,
+        0.0,
+        75.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "bearing_one",
+      "label": "bearing_one",
+      "pos": [
+        0.0,
+        0.0,
+        112.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "primary_turbine_case",
+      "label": "primary_turbine_case",
+      "pos": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "bearing_case",
+      "label": "bearing_case",
+      "pos": [
+        0.0,
+        0.0,
+        220.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#c01a1a"
+    },
+    {
+      "part": "air_turbine_case",
+      "label": "air_turbine_case",
+      "pos": [
+        0.0,
+        0.0,
+        278.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "air_turbine_one",
+      "label": "air_turbine_one",
+      "pos": [
+        0.0,
+        0.0,
+        290.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "air_turbine_bracket",
+      "label": "air_turbine_bracket",
+      "pos": [
+        0.0,
+        0.0,
+        292.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "air_turbine_two",
+      "label": "air_turbine_two",
+      "pos": [
+        0.0,
+        0.0,
+        320.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "air_turbine_three",
+      "label": "air_turbine_three",
+      "pos": [
+        0.0,
+        0.0,
+        350.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "air_turbine_four",
+      "label": "air_turbine_four",
+      "pos": [
+        0.0,
+        0.0,
+        380.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "air_turbine_five",
+      "label": "air_turbine_five",
+      "pos": [
+        0.0,
+        0.0,
+        410.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_intake_bracket",
+      "label": "petrol_intake_bracket",
+      "pos": [
+        0.0,
+        0.0,
+        440.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_intake_case",
+      "label": "petrol_intake_case",
+      "pos": [
+        0.0,
+        0.0,
+        445.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "pipe_array",
+      "label": "pipe_array",
+      "pos": [
+        0.0,
+        0.0,
+        460.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_turbine_bracket",
+      "label": "petrol_turbine_bracket",
+      "pos": [
+        0.0,
+        0.0,
+        490.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_turbine_case",
+      "label": "petrol_turbine_case",
+      "pos": [
+        0.0,
+        0.0,
+        505.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_turbine_two",
+      "label": "petrol_turbine_two",
+      "pos": [
+        0.0,
+        0.0,
+        510.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_turbine_three",
+      "label": "petrol_turbine_three",
+      "pos": [
+        0.0,
+        0.0,
+        535.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_turbine_four",
+      "label": "petrol_turbine_four",
+      "pos": [
+        0.0,
+        0.0,
+        560.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_turbine_five",
+      "label": "petrol_turbine_five",
+      "pos": [
+        0.0,
+        0.0,
+        578.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "rear_case",
+      "label": "rear_case",
+      "pos": [
+        0.0,
+        0.0,
+        600.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#c01a1a"
+    },
+    {
+      "part": "rear_mounting_shaft",
+      "label": "rear_mounting_shaft",
+      "pos": [
+        0.0,
+        0.0,
+        615.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#bfc4cc"
+    },
+    {
+      "part": "petrol_turbine_one",
+      "label": "petrol_turbine_one",
+      "pos": [
+        0.0,
+        0.0,
+        660.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#e0e0da"
+    },
+    {
+      "part": "end_cone",
+      "label": "end_cone",
+      "pos": [
+        0.0,
+        0.0,
+        750.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#26262b"
+    },
+    {
+      "part": "exhaust_case",
+      "label": "exhaust_case",
+      "pos": [
+        0.0,
+        0.0,
+        800.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#e0e0da"
+    },
+    {
+      "part": "inner_body",
+      "label": "inner_body",
+      "pos": [
+        0.0,
+        0.0,
+        80.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#b87347"
+    },
+    {
+      "part": "outer_body",
+      "label": "outer_body",
+      "pos": [
+        0.0,
+        0.0,
+        -20.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#ede8dc"
+    },
+    {
+      "part": "front_rim",
+      "label": "front_rim",
+      "pos": [
+        0.0,
+        0.0,
+        -20.0
+      ],
+      "rot_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "#c01a1a"
+    }
+  ],
+  "build": [],
+  "assembly_stages": [
+    {
+      "stage": 0,
+      "labels": [
+        "central_mounting_shaft"
+      ],
+      "step_file": "asm/asm_00.step"
+    },
+    {
+      "stage": 1,
+      "labels": [
+        "nose_cone",
+        "primary_turbine",
+        "primary_turbine_bushing",
+        "bearing_one"
+      ],
+      "step_file": "asm/asm_01.step"
+    },
+    {
+      "stage": 2,
+      "labels": [
+        "air_turbine_one",
+        "air_turbine_two",
+        "air_turbine_three",
+        "air_turbine_four",
+        "air_turbine_five",
+        "air_turbine_bracket"
+      ],
+      "step_file": "asm/asm_02.step"
+    },
+    {
+      "stage": 3,
+      "labels": [
+        "primary_turbine_case",
+        "bearing_case",
+        "air_turbine_case"
+      ],
+      "step_file": "asm/asm_03.step"
+    },
+    {
+      "stage": 4,
+      "labels": [
+        "petrol_intake_bracket",
+        "petrol_intake_case",
+        "petrol_turbine_bracket",
+        "petrol_turbine_case",
+        "pipe_array"
+      ],
+      "step_file": "asm/asm_04.step"
+    },
+    {
+      "stage": 5,
+      "labels": [
+        "petrol_turbine_two",
+        "petrol_turbine_three",
+        "petrol_turbine_four",
+        "petrol_turbine_five"
+      ],
+      "step_file": "asm/asm_05.step"
+    },
+    {
+      "stage": 6,
+      "labels": [
+        "rear_case",
+        "rear_mounting_shaft",
+        "petrol_turbine_one",
+        "exhaust_case",
+        "end_cone"
+      ],
+      "step_file": "asm/asm_06.step"
+    },
+    {
+      "stage": 7,
+      "labels": [
+        "inner_body",
+        "outer_body",
+        "front_rim"
+      ],
+      "step_file": "asm/asm_07.step"
+    }
+  ],
+  "motion": {
+    "type": "spin"
+  }
+}
